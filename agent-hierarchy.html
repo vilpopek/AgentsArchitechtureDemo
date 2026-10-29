@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Agent Hierarchy — Requirements-to-Tests Pipeline</title>
+<style>
+  @page { size: landscape; margin: 10mm; }
+  :root {
+    --sonnet: #4f6df5;
+    --haiku: #2fa66a;
+    --orch: #a24fd6;
+    --input: #888;
+    --line: #c3c9d9;
+    --bg: #f7f8fc;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: #1c2030;
+    margin: 0;
+    padding: 14px 18px;
+  }
+  h1 { text-align: center; margin: 0 0 2px; font-size: 19px; }
+  p.subtitle { text-align: center; margin: 0 0 10px; color: #555; font-size: 12px; }
+
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+    font-size: 11px;
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; display: inline-block; flex: none; }
+
+  /* main horizontal pipeline */
+  .pipeline {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: nowrap;
+  }
+  .node {
+    border-radius: 8px;
+    padding: 7px 9px;
+    width: 128px;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,.15);
+    color: #fff;
+    flex: none;
+  }
+  .node .title { font-weight: 600; font-size: 11px; margin-bottom: 2px; line-height: 1.15; }
+  .node .role { font-size: 9px; line-height: 1.25; font-weight: 400; opacity: .95; }
+  .node .tag { font-size: 8px; opacity: .85; margin-top: 4px; display: block; }
+
+  .input-node { background: var(--input); }
+  .orch-node { background: var(--orch); }
+  .sonnet-node { background: var(--sonnet); }
+  .haiku-node { background: var(--haiku); }
+
+  .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    color: var(--line);
+    font-size: 16px;
+    flex: none;
+  }
+
+  .stack { display: flex; flex-direction: column; gap: 4px; justify-content: center; }
+  .stack .node { width: 128px; }
+  .stack-label { font-size: 7.5px; color: #777; text-align: center; font-style: italic; margin-top: 2px; }
+
+  /* branch + crosscut row below, side by side */
+  .lower {
+    display: flex;
+    gap: 14px;
+    margin-top: 16px;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: nowrap;
+  }
+  .panel {
+    border: 1px dashed var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    background: #fff;
+  }
+  .panel-title { font-size: 10.5px; font-weight: 600; color: #555; margin-bottom: 8px; text-align: center; }
+  .branch-row { display: flex; gap: 8px; align-items: center; justify-content: center; }
+  .branch-row .node { width: 118px; }
+  .branch-row .arrow { width: 14px; font-size: 13px; }
+
+  .crosscut-panel { display: flex; align-items: center; gap: 10px; max-width: 420px; }
+  .crosscut-panel .node { width: 140px; }
+  .crosscut-panel p { font-size: 9.5px; color: #666; margin: 0; }
+</style>
+</head>
+<body>
+
+  <h1>Requirements → Code → Tests → Report Pipeline</h1>
+  <p class="subtitle">Agent hierarchy for the <code>.github/agents</code> pipeline, with model tier per agent</p>
+
+  <div class="legend">
+    <span><span class="swatch" style="background:var(--orch)"></span>Orchestrator</span>
+    <span><span class="swatch" style="background:var(--sonnet)"></span>Claude Sonnet 5 — complex / judgment-heavy</span>
+    <span><span class="swatch" style="background:var(--haiku)"></span>Claude Haiku 4.5 — simple / mechanical</span>
+    <span><span class="swatch" style="background:var(--input)"></span>Input artifact (not an agent)</span>
+  </div>
+
+  <div class="pipeline">
+
+    <div class="node input-node">
+      <div class="title">Requirements Doc</div>
+      <div class="role">Raw functional / technical / UX / business input</div>
+    </div>
+    <div class="arrow">→</div>
+
+    <div class="node orch-node">
+      <div class="title">Orchestrator</div>
+      <div class="role">Owns pipeline state; delegates every step, gates on human approval</div>
+      <span class="tag">Sonnet 5</span>
+    </div>
+    <div class="arrow">→</div>
+
+    <div class="node sonnet-node">
+      <div class="title">Requirements Analyst</div>
+      <div class="role">Atomic, ID'd, versioned requirements → requirements.yaml</div>
+      <span class="tag">Sonnet 5</span>
+    </div>
+    <div class="arrow">→</div>
+
+    <div class="node sonnet-node">
+      <div class="title">Functional Spec Writer</div>
+      <div class="role">Acceptance criteria, edge cases, data shapes per requirement</div>
+      <span class="tag">Sonnet 5</span>
+    </div>
+    <div class="arrow">→</div>
+
+    <div class="stack">
+      <div class="node sonnet-node">
+        <div class="title">Code Generation</div>
+        <div class="role">Implements one feature from its spec</div>
+        <span class="tag">Sonnet 5</span>
+      </div>
+      <div class="node sonnet-node">
+        <div class="title">Test Generation</div>
+        <div class="role">Tests from spec's acceptance criteria</div>
+        <span class="tag">Sonnet 5</span>
+      </div>
+      <div class="stack-label">parallel fan-out per feature</div>
+    </div>
+    <div class="arrow">→</div>
+
+    <div class="node haiku-node">
+      <div class="title">Traceability Linker</div>
+      <div class="role">Fan-in: requirement ↔ code ↔ test ↔ status matrix</div>
+      <span class="tag">Haiku 4.5</span>
+    </div>
+    <div class="arrow">→</div>
+
+    <div class="node haiku-node">
+      <div class="title">Test Execution</div>
+      <div class="role">Runs suite → JUnit results + coverage data</div>
+      <span class="tag">Haiku 4.5</span>
+    </div>
+    <div class="arrow">→</div>
+
+    <div class="node haiku-node">
+      <div class="title">Report Generation</div>
+      <div class="role">Builds static report.html dashboard</div>
+      <span class="tag">Haiku 4.5</span>
+    </div>
+    <div class="arrow">→</div>
+
+    <div class="node haiku-node">
+      <div class="title">Review / QA</div>
+      <div class="role">Read-only sign-off checklist</div>
+      <span class="tag">Haiku 4.5</span>
+    </div>
+
+  </div>
+
+  <div class="lower">
+
+    <div class="panel">
+      <div class="panel-title">Change-management loop — triggered when the requirements doc is updated</div>
+      <div class="branch-row">
+        <div class="node input-node"><div class="title">New Req. Version</div></div>
+        <div class="arrow">→</div>
+        <div class="node haiku-node">
+          <div class="title">Change Detection</div>
+          <div class="role">added / removed / modified diff</div>
+          <span class="tag">Haiku 4.5</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node sonnet-node">
+          <div class="title">Impact Analysis</div>
+          <div class="role">builds review-queue.json</div>
+          <span class="tag">Sonnet 5</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node orch-node">
+          <div class="title">Orchestrator</div>
+          <div class="role">human approval, re-enters pipeline</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel crosscut-panel">
+      <div class="node haiku-node">
+        <div class="title">Cost Estimation</div>
+        <div class="role">Logs $ after each agent's turn</div>
+        <span class="tag">Haiku 4.5</span>
+      </div>
+      <p>Cross-cutting — runs after any agent above finishes real work, updating <code>project1/cost-ledger.json</code>. Never updates on a bare status question.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>

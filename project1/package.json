@@ -1,0 +1,17 @@
+{
+  "name": "varipalvelu",
+  "private": true,
+  "type": "module",
+  "description": "Covers: REQ-FUNC-001, REQ-FUNC-002, REQ-TECH-001",
+  "scripts": {
+    "dev": "node serve.js",
+    "test": "node --test --experimental-test-coverage"
+  },
+  "config": {
+    "devPort": 4173
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1"
+  }
+}
+

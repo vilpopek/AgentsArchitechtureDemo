@@ -1,0 +1,32 @@
+{
+  "REQ-FUNC-001": {
+    "requirement_hash": "a3f5c9d2e8b716a0f4c2d9e7b1a5f3c8d0e6b2a9f7c4d1e8b5a2f9c6d3e0b7a4",
+    "code_files": ["index.html", "styles.css"],
+    "test_files": ["tests/dom.test.js"],
+    "status": "ok"
+  },
+  "REQ-FUNC-002": {
+    "requirement_hash": "c1d4a7f2e9b60835d1a4c7f0e3b69258d1a4c7f0e3b69258a4c7f0e3b6925817",
+    "code_files": ["src/app.js"],
+    "test_files": ["tests/app.test.js", "tests/dom.test.js"],
+    "status": "ok"
+  },
+  "REQ-TECH-001": {
+    "requirement_hash": "c60fd7e53309b0fcea3ef2eaab6ac087de1edde9b76d4a5d96ff0ba5a48a04a0",
+    "code_files": ["src/images.js", "src/assets/forest.svg", "src/assets/mountain.svg", "src/assets/river.svg", "src/assets/flowerfield.svg", "src/assets/beach.svg", "src/assets/starrysky.svg"],
+    "test_files": ["tests/app.test.js"],
+    "status": "ok"
+  },
+  "REQ-FUNC-003": {
+    "requirement_hash": "4e7a1c9f2d8b50367f1a4c9e2b6d803f1a7c4e9b2f6d803a7c1e4b9f2a6d8037",
+    "code_files": ["src/app.js", "styles.css", "index.html"],
+    "test_files": ["tests/dom.test.js", "tests/app.test.js"],
+    "status": "ok"
+  },
+  "REQ-UX-001": {
+    "requirement_hash": "9b3e7f1a4c8d02657a1f4c9e3b6d80275e9a1c4f2d7b60381f4c9e7a3b6d8025",
+    "code_files": ["index.html", "styles.css"],
+    "test_files": ["tests/dom.test.js"],
+    "status": "ok"
+  }
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Väripalvelu – luontokuvat</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Covers: REQ-UX-001 -->
+  <h1 id="page-title">Testipalvelu</h1>
+  <!-- Covers: REQ-FUNC-001, REQ-FUNC-002, REQ-FUNC-003 -->
+  <main class="page">
+    <div id="image-display" class="image-display" aria-live="polite"></div>
+    <div class="buttons">
+      <button id="reveal-button" type="button">Näytä luontokuva</button>
+      <button id="color-button" type="button">Vaihda taustaväriä</button>
+    </div>
+  </main>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

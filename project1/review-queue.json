@@ -1,0 +1,72 @@
+{
+  "generatedBy": "requirements-analyst",
+  "items": [
+    {
+      "id": "AMB-001",
+      "relatedRequirement": "REQ-TECH-001",
+      "issue": "Document asks to 'fetch six example images from the internet'. Downloading and re-hosting real photos from the web risks unclear/incorrect copyright status and broken external links. Proposed resolution: ship six original, locally-stored SVG nature illustrations (forest, mountain, river, flower field, beach, starry sky) created for this project, which are guaranteed copyright-free and work offline.",
+      "status": "approved"
+    },
+    {
+      "id": "AMB-002",
+      "relatedRequirement": "REQ-FUNC-002",
+      "issue": "'Satunnainen' (random) is not defined precisely: may the same image be shown twice in a row, or must each click show an image different from the one currently displayed? Proposed resolution: true uniform random pick each click (repeats allowed), since the source text does not state a no-repeat rule.",
+      "status": "approved"
+    },
+    {
+      "id": "AMB-003",
+      "relatedRequirement": "REQ-FUNC-002",
+      "issue": "No image is specified for the initial page state before the button is first clicked. Proposed resolution: show an empty placeholder area until the first click.",
+      "status": "approved"
+    },
+    {
+      "type": "requirement_modified",
+      "requirement_id": "REQ-FUNC-001",
+      "affected_tests": ["tests/dom.test.js"],
+      "affected_code": ["index.html", "styles.css"],
+      "diff_summary": "Requirement changed from 'a single button positioned in the center of the page' to 'two buttons positioned in the center of the page' (source: 'kaksi nappia').",
+      "proposed_test_diff": "In tests/dom.test.js, update/replace the single-button assertion with: (1) assert exactly two <button> elements exist in index.html, (2) assert both buttons are present within the centered container and both are visually centered (e.g. same centered parent / flex layout), (3) keep or add distinct selectors/ids for 'first button' and 'second button' so REQ-FUNC-002 and REQ-FUNC-003 tests can target each independently. In index.html add the second <button> element; in styles.css adjust the centering rule (e.g. flex/grid on the container) so two buttons lay out centered together instead of one.",
+      "action_needed": "approved"
+    },
+    {
+      "type": "requirement_modified",
+      "requirement_id": "REQ-FUNC-002",
+      "affected_tests": ["tests/app.test.js", "tests/dom.test.js"],
+      "affected_code": ["src/app.js"],
+      "diff_summary": "Requirement narrowed from 'clicking the button displays a new random nature image' to 'clicking the first button displays a new random nature image', since a second button with different behavior (REQ-FUNC-003) now exists.",
+      "proposed_test_diff": "In tests/app.test.js and tests/dom.test.js, update the click-handler test(s) to target the first button specifically (e.g. by id/selector such as '#btn-image' or 'first button') rather than a generic single button, and assert that clicking it swaps the displayed nature image while leaving background color unchanged. Add/confirm a negative assertion that clicking the first button does NOT trigger the background-color change owned by REQ-FUNC-003. In src/app.js, ensure the existing random-image click handler is attached only to the first button element now that a second button exists.",
+      "action_needed": "approved"
+    },
+    {
+      "type": "requirement_added",
+      "requirement_id": "REQ-FUNC-003",
+      "affected_tests": [],
+      "affected_code": [],
+      "diff_summary": "New requirement: clicking the second button changes the page's background color to a random color (source: 'Toista nappia painamalla sivun taustaväri vaihtuu sattumanvaraiseksi.').",
+      "proposed_test_diff": "No existing test/code changes proposed here; this is new work. Routes to Functional Spec Agent to define the spec, then Code Generation (new click handler for the second button in src/app.js, random color generation) and Test Generation (new test asserting background color changes on click and does not affect the displayed image) once approved.",
+      "action_needed": "approved"
+    },
+    {
+      "type": "requirement_added",
+      "requirement_id": "REQ-UX-001",
+      "affected_tests": [],
+      "affected_code": [],
+      "diff_summary": "New requirement: the page displays a header titled 'Testipalvelu' at the top of the page (source: 'Sivun ylälaidassa voisi olla otsake Testipalvelu.').",
+      "proposed_test_diff": "No existing test/code changes proposed here; this is new work. Routes to Functional Spec Agent to define the spec, then Code Generation (add header element to index.html) and Test Generation (new DOM test asserting a header with text 'Testipalvelu' exists at the top of the page) once approved.",
+      "action_needed": "approved"
+    },
+    {
+      "id": "AMB-004",
+      "relatedRequirement": "REQ-FUNC-003",
+      "issue": "'Sattumanvaraiseksi' (random) does not specify the color format/palette for the background change. Unclear whether the color should be a fully random RGB/hex value, a random pick from a fixed palette, or constrained to avoid clashing with text/button contrast. Proposed resolution: generate a fully random hex color on each click, with no palette restriction, unless the customer specifies accessibility/contrast constraints.",
+      "status": "approved"
+    },
+    {
+      "id": "AMB-005",
+      "relatedRequirement": "REQ-UX-001",
+      "issue": "The source document is in Finnish and literally names the header text as 'Testipalvelu', but the rest of the generated requirements/acceptance criteria are written in English. Unclear whether the header text itself should be translated (e.g. to 'Test Service') or kept verbatim in Finnish as written. Proposed resolution: keep the header text verbatim as 'Testipalvelu' since it is a literal UI label named in the source, not a description to translate.",
+      "status": "approved"
+    }
+  ]
+}
+

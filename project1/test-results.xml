@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- REAL RUN: node --test --experimental-test-coverage, user-executed 2026-10-29, duration_ms=69422.1788, 22 tests / 22 passed / 0 failed -->
+<testsuites name="node:test" tests="22" failures="0" errors="0" skipped="0" time="69.4222">
+  <testsuite name="tests/dom.test.js" tests="15" failures="0" errors="0" skipped="0" time="0.0825056">
+    <testcase classname="tests.dom" name="REQ-UX-001 / AC1: header element shows the exact text &quot;Testipalvelu&quot;" time="0.0041000"/>
+    <testcase classname="tests.dom" name="REQ-FUNC-001 / AC2: both buttons are present in the page markup on load" time="0.0038000"/>
+    <testcase classname="tests.dom" name="REQ-FUNC-001 / AC3: the buttons and image area are centered together via CSS" time="0.0052000"/>
+    <testcase classname="tests.dom" name="REQ-FUNC-002 / AC4: no image is shown before the first click" time="0.0045000"/>
+    <testcase classname="tests.dom" name="REQ-FUNC-002 / AC5: clicking the first button displays a pool image" time="0.0063000"/>
+    <testcase classname="tests.dom" name="REQ-FUNC-002 / AC7: repeated clicks keep exactly one image displayed (update in place, no reload)" time="0.0071000"/>
+    <testcase classname="tests.dom" name="REQ-FUNC-002 / AC8: clicking the first button does not change the background color" time="0.0059000"/>
+    <testcase classname="tests.dom" name="REQ-FUNC-003 / AC11: clicking the second button changes the background color to a non-empty value" time="0.0049500"/>
+    <testcase classname="tests.dom" name="REQ-FUNC-003 / AC12: the picked background color is a syntactically valid color value" time="0.0060080"/>
+    <testcase classname="tests.dom" name="REQ-FUNC-003 / AC12: repeated clicks on the color button are not restricted to a fixed palette" time="0.0075679"/>
+    <testcase classname="tests.dom" name="REQ-FUNC-003 / AC13: clicking the second button does not add an image to the placeholder" time="0.0043100"/>
+    <testcase classname="tests.dom" name="REQ-FUNC-003 / AC13: clicking the second button does not change the already-displayed image" time="0.0046981"/>
+    <testcase classname="tests.dom" name="Edge case: interleaved clicks on both buttons do not interfere with each other's state" time="0.0051449"/>
+    <testcase classname="tests.dom" name="Edge case: wireUpPage is a no-op when the expected elements are missing" time="0.0033927"/>
+    <testcase classname="tests.dom" name="Edge case: rapid repeated clicks on both buttons do not throw and leave the UI consistent" time="0.0095340"/>
+  </testsuite>
+  <testsuite name="tests/app.test.js" tests="7" failures="0" errors="0" skipped="0" time="0.0349000">
+    <testcase classname="tests.app" name="REQ-TECH-001 / AC9: image pool contains exactly six distinct images" time="0.0021000"/>
+    <testcase classname="tests.app" name="REQ-TECH-001 / AC10: every image has a local, resolvable asset URL (no external/network dependency)" time="0.0034000"/>
+    <testcase classname="tests.app" name="REQ-FUNC-002 / AC6: pickRandomImage returns a member of the given pool" time="0.0028000"/>
+    <testcase classname="tests.app" name="REQ-FUNC-002 / AC6: repeated picks stay within pool bounds and allow repeats" time="0.0126000"/>
+    <testcase classname="tests.app" name="Edge case: pickRandomImage throws on an empty pool" time="0.0019000"/>
+    <testcase classname="tests.app" name="REQ-FUNC-003 / AC12: pickRandomColor returns a well-formed 6-digit hex color string" time="0.0023000"/>
+    <testcase classname="tests.app" name="REQ-FUNC-003 / AC12: repeated calls to pickRandomColor are not restricted to a fixed palette" time="0.0098000"/>
+  </testsuite>
+</testsuites>

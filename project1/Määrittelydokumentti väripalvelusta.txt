@@ -1,0 +1,10 @@
+Määrittelydokumentti testipalvelusta
+
+Palvelun kuvaus
+
+Tarvitsemme verkkosivun, jonka keskellä on kaksi nappia. Ensimmäistä nappia painamalla sivulle ilmestyy uusi satunnainen luontokuva.
+Voisitteko hakea kuusi esimerkkikuvaa netistä? Näiden tulee olla tekijänoikeusvapaita. Toista nappia painamalla sivun taustaväri
+vaihtuu sattumanvaraiseksi.
+
+Sivun ylälaidassa voisi olla otsake Testipalvelu.
+

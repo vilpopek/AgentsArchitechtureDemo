@@ -1,0 +1,49 @@
+{
+  "added": [
+    "REQ-FUNC-003",
+    "REQ-UX-001"
+  ],
+  "removed": [],
+  "modified": [
+    {
+      "id": "REQ-FUNC-001",
+      "old_text": "The web page displays a single button positioned in the center of the page.",
+      "new_text": "The web page displays two buttons positioned in the center of the page.",
+      "old_hash": "1978c1535b9bfddebcfeb216c2a2f09737e128265154d44b59da87aab1329777",
+      "new_hash": "RECOMPUTE",
+      "hash_changed": true,
+      "change_summary": "Source document now says 'kaksi nappia' (two buttons) instead of 'nappi' (a button) — the page must show two centered buttons instead of one.",
+      "source": "Määrittelydokumentti testipalvelusta.txt: 'Tarvitsemme verkkosivun, jonka keskellä on kaksi nappia.'"
+    },
+    {
+      "id": "REQ-FUNC-002",
+      "old_text": "Clicking the button displays a new random nature image on the page.",
+      "new_text": "Clicking the first button displays a new random nature image on the page.",
+      "old_hash": "025e21ff19f9af8bee7447c7399839c8e62a1f0a4258ead5ae9cad525c4241bb",
+      "new_hash": "RECOMPUTE",
+      "hash_changed": true,
+      "change_summary": "Source now attributes this behavior specifically to the 'first' button ('ensimmäistä nappia') rather than an unqualified single button, since a second button with distinct behavior was introduced in the same sentence group.",
+      "source": "Määrittelydokumentti testipalvelusta.txt: 'Ensimmäistä nappia painamalla sivulle ilmestyy uusi satunnainen luontokuva.'"
+    }
+  ],
+  "unchanged": [
+    {
+      "id": "REQ-TECH-001",
+      "text": "The service provides at least six distinct example nature images, each copyright-free, as the pool for random selection.",
+      "hash": "c60fd7e53309b0fcea3ef2eaab6ac087de1edde9b76d4a5d96ff0ba5a48a04a0"
+    }
+  ],
+  "unchanged_count": 1,
+  "added_details": [
+    {
+      "id": "REQ-FUNC-003",
+      "proposed_text": "Clicking the second button changes the page's background color to a random color.",
+      "source": "Määrittelydokumentti testipalvelusta.txt: 'Toista nappia painamalla sivun taustaväri vaihtuu sattumanvaraiseksi.'"
+    },
+    {
+      "id": "REQ-UX-001",
+      "proposed_text": "The page displays a header titled 'Testipalvelu' at the top of the page.",
+      "source": "Määrittelydokumentti testipalvelusta.txt: 'Sivun ylälaidassa voisi olla otsake Testipalvelu.'"
+    }
+  ]
+}
