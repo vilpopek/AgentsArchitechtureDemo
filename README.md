@@ -12,3 +12,5 @@ End product is app implemented by specifications and dashboard where can be foun
 For requirements changes there is different execution plan.
 
 Made for learning and development purpose. 
+
+Sample app and created Dashboard can be found in project1 folder.
