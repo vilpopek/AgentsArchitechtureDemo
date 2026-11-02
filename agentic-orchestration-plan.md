@@ -64,8 +64,11 @@ flowchart TD
 
 ### 3.4 Test Generation Agent
 - **Input:** Same functional spec + acceptance criteria used by the Code Generation Agent (not the code itself, to avoid "testing the implementation instead of the requirement").
-- **Output:** Test cases (unit/integration/UI) tagged with the requirement ID(s) they verify, e.g. via a tag/annotation (`@requirement("REQ-FUNC-012")`, or a naming convention / metadata file).
-- **Responsibilities:** One or more tests per acceptance criterion. Include negative/edge cases implied by UX and business requirements, not just happy path.
+- **Output:** Playwright and Robot Framework test cases under the project's `tests/` folder, tagged with the requirement ID(s) they verify:
+  - Playwright: `tests/playwright/<requirement-id>.spec.js` — detailed UI/E2E tests incl. edge/negative cases; titles prefixed `REQ-ID ACn:` and tagged `{ tag: ['@REQ-FUNC-012'] }`.
+  - Robot Framework: `tests/robot/<requirement-id>.robot` — keyword-driven, business-readable acceptance tests (Browser library) with `[Tags]    REQ-FUNC-012`.
+  - Shared infrastructure: `tests/playwright.config.js`, `tests/robot/resources/common.resource`, `tests/requirements.txt`.
+- **Responsibilities:** One or more tests per acceptance criterion in each framework. Include negative/edge cases implied by UX and business requirements, not just happy path.
 
 ### 3.5 Traceability Linker (can be a lightweight script/agent, not necessarily LLM-based)
 - **Input:** Code artifacts + test artifacts + requirement IDs.
@@ -73,9 +76,9 @@ flowchart TD
 - **Responsibilities:** The backbone that makes impact analysis possible later.
 
 ### 3.6 Test Execution Agent
-- **Input:** Test suite.
-- **Output:** Test results (pass/fail) + coverage data in standard formats (JUnit XML, lcov/cobertura/opencover depending on stack).
-- **Responsibilities:** Run tests in CI or locally, normalize output format regardless of language/framework used.
+- **Input:** Playwright and Robot Framework suites under `tests/`.
+- **Output:** One merged `test-results.xml` (JUnit; Playwright JUnit reporter + Robot `--xunit`, suites prefixed `playwright:`/`robot:`) + `coverage.lcov` (Chromium V8 coverage collected during the Playwright run).
+- **Responsibilities:** Install browsers/libraries if missing (`npx playwright install`, `pip install -r tests/requirements.txt`, `rfbrowser init`), run both suites against the locally served app, and normalize the output.
 
 ### 3.7 Change Detection Agent
 - **Input:** New version of the customer requirements document.
@@ -128,22 +131,39 @@ This maps well onto either:
 |---|---|
 | `requirements.yaml` (or JSON) | Atomic, ID'd, versioned/hashed requirements, typed (functional/technical/ux/business) |
 | `traceability-matrix.json` | `requirement_id ↔ code files ↔ test files ↔ status (ok/stale/orphan)` |
-| `test-results.xml` (JUnit format) | Normalized test pass/fail output regardless of language |
-| `coverage.xml` / `lcov.info` | Normalized coverage data regardless of language |
+| `tests/playwright/*.spec.js` | Playwright UI/E2E tests, one file per requirement |
+| `tests/robot/*.robot` | Robot Framework acceptance tests, one file per requirement |
+| `test-results.xml` (JUnit format) | Merged Playwright + Robot Framework pass/fail output |
+| `coverage.lcov` | Coverage data from the Playwright run (Chromium V8 → lcov) |
 | `report.html` | Final human-facing dashboard combining the above |
 | `review-queue.json` | Pending items needing human sign-off (ambiguous reqs, proposed test diffs, orphan tests) |
 
-Tagging convention example (language-agnostic idea, adapt to your stack):
-```text
-// Covers: REQ-FUNC-012, REQ-UX-004
+Tagging convention:
+```js
+// Playwright — tests/playwright/REQ-FUNC-012.spec.js
+// Covers: REQ-FUNC-012
+test('REQ-FUNC-012 AC1: shows reset link', { tag: ['@REQ-FUNC-012', '@AC1'] }, async ({ page }) => { /* ... */ });
 ```
-or a dedicated attribute/decorator per test framework (e.g. `[Trait("Requirement","REQ-FUNC-012")]` in .NET, `pytest.mark.requirement("REQ-FUNC-012")` in Python, a custom Jest `test.each` tag, etc.)
+```robotframework
+# Robot Framework — tests/robot/REQ-FUNC-012.robot
+# Covers: REQ-FUNC-012
+*** Settings ***
+Resource     resources/common.resource
+Test Tags    REQ-FUNC-012
+
+*** Test Cases ***
+REQ-FUNC-012 AC1 Reset Link Is Shown
+    [Tags]    AC1
+    Given User Is On Login Page
+    Then Reset Link Should Be Visible
+```
 
 ---
 
 ## 6. Suggested Toolchain by Layer
 
-- **Coverage/results aggregation → HTML:** ReportGenerator (.NET/any via cobertura), Istanbul/nyc + `nyc report --reporter=html` (JS/TS), coverage.py + `coverage html` (Python), JaCoCo (Java) — all can emit or be post-processed into one combined static HTML site. Allure is a good option if you want a single report that merges results + history + categorization nicely.
+- **Test frameworks:** Playwright (`@playwright/test`) for UI/E2E tests and Robot Framework with the Browser library (Playwright-based) for keyword-driven acceptance tests. Both emit JUnit-compatible XML (`--reporter=junit`, `robot --xunit`) that is merged into one `test-results.xml`.
+- **Coverage/results aggregation → HTML:** Playwright Chromium V8 coverage (e.g. `monocart-reporter`) → lcov; Playwright HTML report and Robot `log.html`/`report.html` are linked from the combined `report.html`. Allure is a good option if you want a single report that merges results + history + categorization nicely (both frameworks have Allure adapters).
 - **Traceability matrix:** Start simple — a JSON/YAML file in the repo, versioned in git, so every change is diffable and reviewable like code. Only move to a database if the requirement count gets large (hundreds+).
 - **Change detection:** Git diff on `requirements.yaml` plus content-hash comparison per requirement ID is usually sufficient; no special tooling needed.
 

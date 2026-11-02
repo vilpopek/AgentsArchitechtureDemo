@@ -14,7 +14,7 @@ You are a specialist at maintaining `traceability-matrix.json` — the backbone 
 
 ## Approach
 1. Read the current `traceability-matrix.json` (create if missing).
-2. For each requirement ID processed this run, scan the linked code files and test files (by the `Covers:`/tag conventions used by the Code Generation and Test Generation agents).
+2. For each requirement ID processed this run, scan the linked code files (`Covers:` comments) and test files under `tests/`: Playwright `tests/playwright/*.spec.*` (`// Covers:` header, `@REQ-...` tags / `REQ-ID ACn:` titles) and Robot Framework `tests/robot/*.robot` (`# Covers:` header, `Test Tags` / `[Tags]`).
 3. Update the entry: `requirement_id`, `requirement_hash` (from `requirements.yaml`), `code_files`, `test_files`, `status`.
 4. Set `status` to `ok` if both code and tests exist and the requirement hash matches the last-linked hash; `stale` if the requirement hash changed since last link; `orphan_test`/`orphan_code` if a test/code file references a requirement ID not found in `requirements.yaml`.
 5. Save the matrix.
@@ -26,7 +26,7 @@ Updated `traceability-matrix.json`:
   "REQ-FUNC-012": {
     "requirement_hash": "...",
     "code_files": ["src/auth/resetPassword.ts"],
-    "test_files": ["tests/auth/resetPassword.spec.ts"],
+    "test_files": ["tests/playwright/REQ-FUNC-012.spec.js", "tests/robot/REQ-FUNC-012.robot"],
     "status": "ok"
   }
 }

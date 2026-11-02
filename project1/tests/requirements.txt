@@ -1,0 +1,5 @@
+# Python dependencies for the Robot Framework suite (project1/tests/robot).
+# Install with: pip install -r tests/requirements.txt
+# Then one-time browser install for the Browser library: rfbrowser init
+robotframework>=7.0,<8.0
+robotframework-browser>=19.0,<20.0

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Robot" tests="12" errors="0" failures="0" skipped="0" time="38.807" timestamp="2026-11-02T07:00:17.030436">
+<testsuite name="REQ-FUNC-001" tests="2" errors="0" failures="0" skipped="0" time="15.090" timestamp="2026-11-02T07:00:17.057509">
+<testcase classname="Robot.REQ-FUNC-001" name="AC2 - Two buttons are visible immediately on page load" time="0.050">
+</testcase>
+<testcase classname="Robot.REQ-FUNC-001" name="AC3 - Both buttons are centered together in the viewport" time="0.040">
+</testcase>
+<properties>
+<property name="Documentation" value="Covers: REQ-FUNC-001"/>
+</properties>
+</testsuite>
+<testsuite name="REQ-FUNC-002" tests="4" errors="0" failures="0" skipped="0" time="6.429" timestamp="2026-11-02T07:00:32.153906">
+<testcase classname="Robot.REQ-FUNC-002" name="AC4 - No image is shown before the first click" time="0.031">
+</testcase>
+<testcase classname="Robot.REQ-FUNC-002" name="AC5 AND AC7 - Clicking the first button shows an image in place" time="0.063">
+</testcase>
+<testcase classname="Robot.REQ-FUNC-002" name="AC6 - Repeated clicks keep exactly one image and vary the selection" time="0.615">
+</testcase>
+<testcase classname="Robot.REQ-FUNC-002" name="AC8 - Clicking the first button does not change the background color" time="0.076">
+</testcase>
+<properties>
+<property name="Documentation" value="Covers: REQ-FUNC-002"/>
+</properties>
+</testsuite>
+<testsuite name="REQ-FUNC-003" tests="3" errors="0" failures="0" skipped="0" time="6.056" timestamp="2026-11-02T07:00:38.586975">
+<testcase classname="Robot.REQ-FUNC-003" name="AC11 - Clicking the second button changes the background color" time="0.070">
+</testcase>
+<testcase classname="Robot.REQ-FUNC-003" name="AC12 - Repeated clicks vary the picked color" time="0.446">
+</testcase>
+<testcase classname="Robot.REQ-FUNC-003" name="AC13 - Clicking the second button does not affect the displayed image" time="0.113">
+</testcase>
+<properties>
+<property name="Documentation" value="Covers: REQ-FUNC-003"/>
+</properties>
+</testsuite>
+<testsuite name="REQ-TECH-001" tests="2" errors="0" failures="0" skipped="0" time="5.836" timestamp="2026-11-02T07:00:44.650908">
+<testcase classname="Robot.REQ-TECH-001" name="AC9 - Image pool contains exactly six distinct images" time="0.020">
+</testcase>
+<testcase classname="Robot.REQ-TECH-001" name="AC10 - Repeated clicks only ever reveal images from the known local pool" time="0.468">
+</testcase>
+<properties>
+<property name="Documentation" value="Covers: REQ-TECH-001"/>
+</properties>
+</testsuite>
+<testsuite name="REQ-UX-001" tests="1" errors="0" failures="0" skipped="0" time="5.345" timestamp="2026-11-02T07:00:50.490268">
+<testcase classname="Robot.REQ-UX-001" name="AC1 - Header &quot;Testipalvelu&quot; is visible at the top of the page on load" time="0.056">
+</testcase>
+<properties>
+<property name="Documentation" value="Covers: REQ-UX-001"/>
+</properties>
+</testsuite>
+</testsuite>

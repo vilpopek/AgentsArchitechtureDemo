@@ -1,0 +1,2575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.5 (Python 3.12.2 on win32)" generated="2026-11-02T07:00:17.027884" rpa="false" schemaversion="5">
+<suite id="s1" name="Robot" source="C:\Projects\Temp\SecretAgentTech\project1\tests\robot">
+<suite id="s1-s1" name="REQ-FUNC-001" source="C:\Projects\Temp\SecretAgentTech\project1\tests\robot\REQ-FUNC-001.robot">
+<kw name="Setup Test Suite" owner="common" type="SETUP">
+<kw name="Start Application Server" owner="common">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Port Is Open" owner="common">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:19.448808" level="INFO">${open} = False</msg>
+<var>${open}</var>
+<arg>__import__('socket').socket().connect_ex(('localhost', int(${port}))) == 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:17.401263" elapsed="2.048569"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<msg time="2026-11-02T07:00:19.450828" level="FAIL">'False' should be true.</msg>
+<arg>${open}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="FAIL" start="2026-11-02T07:00:19.449832" elapsed="0.002010">'False' should be true.</status>
+</kw>
+<arg>${PORT}</arg>
+<status status="FAIL" start="2026-11-02T07:00:17.401263" elapsed="2.050579">'False' should be true.</status>
+</kw>
+<msg time="2026-11-02T07:00:19.451842" level="INFO">${already_up} = False</msg>
+<var>${already_up}</var>
+<arg>Port Is Open</arg>
+<arg>${PORT}</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-11-02T07:00:17.400261" elapsed="2.051581"/>
+</kw>
+<if>
+<branch type="IF" condition="not ${already_up}">
+<kw name="Start Process" owner="Process">
+<msg time="2026-11-02T07:00:19.452841" level="INFO">Starting process:
+node serve.js</msg>
+<arg>node</arg>
+<arg>serve.js</arg>
+<arg>cwd=${PROJECT_ROOT}</arg>
+<arg>alias=app-server</arg>
+<doc>Starts a new process on background.</doc>
+<status status="PASS" start="2026-11-02T07:00:19.451842" elapsed="0.011531"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-11-02T07:00:19.464379" level="INFO">${SERVER_STARTED_HERE} = True</msg>
+<arg>${SERVER_STARTED_HERE}</arg>
+<arg>${True}</arg>
+<doc>Makes the variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2026-11-02T07:00:19.463373" elapsed="0.001006"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Port Is Open" owner="common">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:19.968896" level="INFO">${open} = True</msg>
+<var>${open}</var>
+<arg>__import__('socket').socket().connect_ex(('localhost', int(${port}))) == 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:19.464379" elapsed="0.504517"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${open}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:19.968896" elapsed="0.000578"/>
+</kw>
+<arg>${PORT}</arg>
+<status status="PASS" start="2026-11-02T07:00:19.464379" elapsed="0.506171"/>
+</kw>
+<arg>15x</arg>
+<arg>1s</arg>
+<arg>Port Is Open</arg>
+<arg>${PORT}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2026-11-02T07:00:19.464379" elapsed="0.506171"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:19.451842" elapsed="0.518708"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Suite Variable" owner="BuiltIn">
+<arg>${SERVER_STARTED_HERE}</arg>
+<arg>${False}</arg>
+<doc>Makes the variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" start="2026-11-02T07:00:19.971548" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-11-02T07:00:19.970550" elapsed="0.000998"/>
+</branch>
+<status status="PASS" start="2026-11-02T07:00:19.451842" elapsed="0.519706"/>
+</if>
+<status status="PASS" start="2026-11-02T07:00:17.400261" elapsed="2.571287"/>
+</kw>
+<kw name="Open Application" owner="common">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-11-02T07:00:19.972546" level="INFO">{"browser": "chromium", "headless": true, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Projects\\Temp\\SecretAgentTech\\project1\\test-output\\robot\\browser\\traces\\temp\\b62e47cd-3e18-4dd6-a18c-30d41d710c51"}</msg>
+<msg time="2026-11-02T07:00:20.007780" level="INFO">Starting Browser process C:\Projects\Temp\SecretAgentTech\project1\.venv\Lib\site-packages\Browser\wrapper\index.js using at 127.0.0.1:63055</msg>
+<msg time="2026-11-02T07:00:29.652988" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":true,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Projects\\Temp\\SecretAgentTech\\project1\\test-output\\robot\\browser\\traces\\temp\\b62e47cd-3e18-4dd6-a18c-30d41d710c51"}</msg>
+<arg>chromium</arg>
+<arg>headless=True</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-11-02T07:00:19.972546" elapsed="9.680442"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2026-11-02T07:00:29.655010" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2026-11-02T07:00:29.669512" level="INFO">Successfully created context. </msg>
+<msg time="2026-11-02T07:00:29.669512" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2026-11-02T07:00:29.654009" elapsed="0.015503"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-11-02T07:00:31.870806" level="INFO">Successfully initialized new page object and opened url: http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-11-02T07:00:29.669512" elapsed="2.201294"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:19.971548" elapsed="11.899258"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:17.399256" elapsed="14.471550"/>
+</kw>
+<test id="s1-s1-t1" name="AC2 - Two buttons are visible immediately on page load" line="9">
+<kw name="Go To" owner="Browser" type="SETUP">
+<msg time="2026-11-02T07:00:31.892871" level="INFO">Successfully opened URL http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2026-11-02T07:00:31.879321" elapsed="0.013550"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-11-02T07:00:31.912452" level="INFO">Waited for Element with selector #reveal-button at state visible</msg>
+<arg>\#reveal-button</arg>
+<arg>visible</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-11-02T07:00:31.892871" elapsed="0.019581"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-11-02T07:00:31.916451" level="INFO">Waited for Element with selector #color-button at state visible</msg>
+<arg>\#color-button</arg>
+<arg>visible</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-11-02T07:00:31.912452" elapsed="0.004999"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<msg time="2026-11-02T07:00:31.920975" level="INFO">${count} = 2</msg>
+<var>${count}</var>
+<arg>button</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:31.917451" elapsed="0.003524"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-11-02T07:00:31.921977" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${count}</arg>
+<arg>2</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-11-02T07:00:31.920975" elapsed="0.001002"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:31.871810" elapsed="0.050167"/>
+</test>
+<test id="s1-s1-t2" name="AC3 - Both buttons are centered together in the viewport" line="15">
+<kw name="Go To" owner="Browser" type="SETUP">
+<msg time="2026-11-02T07:00:31.939611" level="INFO">Successfully opened URL http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2026-11-02T07:00:31.929503" elapsed="0.010108"/>
+</kw>
+<kw name="Get BoundingBox" owner="Browser">
+<msg time="2026-11-02T07:00:31.961674" level="INFO">${box} = {'x': 435.75, 'y': 501.5, 'width': 408.484375, 'height': 45}</msg>
+<var>${box}</var>
+<arg>.buttons</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets elements size and location as an object ``{x: float, y: float, width: float, height: float}``.</doc>
+<status status="PASS" start="2026-11-02T07:00:31.939611" elapsed="0.022063"/>
+</kw>
+<kw name="Get Viewport Size" owner="Browser">
+<msg time="2026-11-02T07:00:31.963665" level="INFO">View port size received successfully from page.</msg>
+<msg time="2026-11-02T07:00:31.963665" level="INFO">${viewport} = {'width': 1280, 'height': 720}</msg>
+<var>${viewport}</var>
+<tag>Assertion</tag>
+<tag>BrowserControl</tag>
+<tag>Getter</tag>
+<doc>Returns the current viewport dimensions.</doc>
+<status status="PASS" start="2026-11-02T07:00:31.961674" elapsed="0.001991"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:31.964663" level="INFO">${center_x} = 639.9921875</msg>
+<var>${center_x}</var>
+<arg>${box}[x] + ${box}[width] / 2</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:31.963665" elapsed="0.000998"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:31.964663" level="INFO">${half_width} = 640.0</msg>
+<var>${half_width}</var>
+<arg>${viewport}[width] / 2</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:31.964663" elapsed="0.000000"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:31.964663" level="INFO">${diff} = 0.0078125</msg>
+<var>${diff}</var>
+<arg>abs(${center_x} - ${half_width})</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:31.964663" elapsed="0.000000"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:31.965664" level="INFO">${tolerance} = 256.0</msg>
+<var>${tolerance}</var>
+<arg>${viewport}[width] * 0.2</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:31.964663" elapsed="0.001001"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${diff} &lt; ${tolerance}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:31.965664" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:31.925977" elapsed="0.039687"/>
+</test>
+<kw name="Teardown Test Suite" owner="common" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2026-11-02T07:00:32.043485" level="INFO">Closed all browsers</msg>
+<arg>ALL</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-11-02T07:00:31.970186" elapsed="0.073299"/>
+</kw>
+<kw name="Stop Application Server" owner="common">
+<if>
+<branch type="IF" condition="${SERVER_STARTED_HERE}">
+<kw name="Terminate Process" owner="Process">
+<msg time="2026-11-02T07:00:32.044490" level="INFO">Gracefully terminating process.</msg>
+<msg time="2026-11-02T07:00:32.146179" level="INFO">Process completed.</msg>
+<arg>app-server</arg>
+<doc>Stops the process gracefully or forcefully.</doc>
+<status status="PASS" start="2026-11-02T07:00:32.044490" elapsed="0.102765"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:32.044490" elapsed="0.102765"/>
+</branch>
+<status status="PASS" start="2026-11-02T07:00:32.044490" elapsed="0.102765"/>
+</if>
+<status status="PASS" start="2026-11-02T07:00:32.044490" elapsed="0.102765"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:31.970186" elapsed="0.177069"/>
+</kw>
+<doc>Covers: REQ-FUNC-001</doc>
+<status status="PASS" start="2026-11-02T07:00:17.057509" elapsed="15.089746"/>
+</suite>
+<suite id="s1-s2" name="REQ-FUNC-002" source="C:\Projects\Temp\SecretAgentTech\project1\tests\robot\REQ-FUNC-002.robot">
+<kw name="Setup Test Suite" owner="common" type="SETUP">
+<kw name="Start Application Server" owner="common">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Port Is Open" owner="common">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:34.218778" level="INFO">${open} = False</msg>
+<var>${open}</var>
+<arg>__import__('socket').socket().connect_ex(('localhost', int(${port}))) == 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:32.164517" elapsed="2.054261"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<msg time="2026-11-02T07:00:34.219796" level="FAIL">'False' should be true.</msg>
+<arg>${open}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="FAIL" start="2026-11-02T07:00:34.218778" elapsed="0.001018">'False' should be true.</status>
+</kw>
+<arg>${PORT}</arg>
+<status status="FAIL" start="2026-11-02T07:00:32.164517" elapsed="2.055279">'False' should be true.</status>
+</kw>
+<msg time="2026-11-02T07:00:34.219796" level="INFO">${already_up} = False</msg>
+<var>${already_up}</var>
+<arg>Port Is Open</arg>
+<arg>${PORT}</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-11-02T07:00:32.163511" elapsed="2.056285"/>
+</kw>
+<if>
+<branch type="IF" condition="not ${already_up}">
+<kw name="Start Process" owner="Process">
+<msg time="2026-11-02T07:00:34.220789" level="INFO">Starting process:
+node serve.js</msg>
+<arg>node</arg>
+<arg>serve.js</arg>
+<arg>cwd=${PROJECT_ROOT}</arg>
+<arg>alias=app-server</arg>
+<doc>Starts a new process on background.</doc>
+<status status="PASS" start="2026-11-02T07:00:34.219796" elapsed="0.007003"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-11-02T07:00:34.227799" level="INFO">${SERVER_STARTED_HERE} = True</msg>
+<arg>${SERVER_STARTED_HERE}</arg>
+<arg>${True}</arg>
+<doc>Makes the variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2026-11-02T07:00:34.227799" elapsed="0.000000"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Port Is Open" owner="common">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:34.737871" level="INFO">${open} = True</msg>
+<var>${open}</var>
+<arg>__import__('socket').socket().connect_ex(('localhost', int(${port}))) == 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:34.228799" elapsed="0.509072"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${open}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:34.738883" elapsed="0.000518"/>
+</kw>
+<arg>${PORT}</arg>
+<status status="PASS" start="2026-11-02T07:00:34.228799" elapsed="0.511624"/>
+</kw>
+<arg>15x</arg>
+<arg>1s</arg>
+<arg>Port Is Open</arg>
+<arg>${PORT}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2026-11-02T07:00:34.227799" elapsed="0.512624"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:34.219796" elapsed="0.520627"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Suite Variable" owner="BuiltIn">
+<arg>${SERVER_STARTED_HERE}</arg>
+<arg>${False}</arg>
+<doc>Makes the variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" start="2026-11-02T07:00:34.741444" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-11-02T07:00:34.740423" elapsed="0.001021"/>
+</branch>
+<status status="PASS" start="2026-11-02T07:00:34.219796" elapsed="0.521648"/>
+</if>
+<status status="PASS" start="2026-11-02T07:00:32.163511" elapsed="2.577933"/>
+</kw>
+<kw name="Open Application" owner="common">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-11-02T07:00:34.743442" level="INFO">{"browser": "chromium", "headless": true, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Projects\\Temp\\SecretAgentTech\\project1\\test-output\\robot\\browser\\traces\\temp\\d45293c0-a26c-4c66-9582-585f3dfb0119"}</msg>
+<msg time="2026-11-02T07:00:35.652326" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":true,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Projects\\Temp\\SecretAgentTech\\project1\\test-output\\robot\\browser\\traces\\temp\\d45293c0-a26c-4c66-9582-585f3dfb0119"}</msg>
+<arg>chromium</arg>
+<arg>headless=True</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-11-02T07:00:34.742455" elapsed="0.909871"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2026-11-02T07:00:35.654402" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2026-11-02T07:00:35.658602" level="INFO">Successfully created context. </msg>
+<msg time="2026-11-02T07:00:35.659994" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2026-11-02T07:00:35.653326" elapsed="0.006668"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-11-02T07:00:37.632738" level="INFO">Successfully initialized new page object and opened url: http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-11-02T07:00:35.659994" elapsed="1.972744"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:34.741444" elapsed="2.891294"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:32.162547" elapsed="5.470191"/>
+</kw>
+<test id="s1-s2-t1" name="AC4 - No image is shown before the first click" line="9">
+<kw name="Go To" owner="Browser" type="SETUP">
+<msg time="2026-11-02T07:00:37.648892" level="INFO">Successfully opened URL http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.638736" elapsed="0.010156"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<msg time="2026-11-02T07:00:37.662893" level="INFO">${count} = 0</msg>
+<var>${count}</var>
+<arg>\#image-display img</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.648892" elapsed="0.014001"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-11-02T07:00:37.663904" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${count}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.663904" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:37.632738" elapsed="0.031166"/>
+</test>
+<test id="s1-s2-t2" name="AC5 AND AC7 - Clicking the first button shows an image in place" line="13">
+<kw name="Go To" owner="Browser" type="SETUP">
+<msg time="2026-11-02T07:00:37.680257" level="INFO">Successfully opened URL http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.670438" elapsed="0.009819"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:37.681261" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.680257" elapsed="0.047337"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<msg time="2026-11-02T07:00:37.730233" level="INFO">${count} = 1</msg>
+<var>${count}</var>
+<arg>\#image-display img</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.727594" elapsed="0.002639"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-11-02T07:00:37.731226" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${count}</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.730233" elapsed="0.000993"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:37.667922" elapsed="0.063304"/>
+</test>
+<test id="s1-s2-t3" name="AC6 - Repeated clicks keep exactly one image and vary the selection" line="18">
+<kw name="Go To" owner="Browser" type="SETUP">
+<msg time="2026-11-02T07:00:37.748907" level="INFO">Successfully opened URL http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.738836" elapsed="0.010071"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-11-02T07:00:37.749485" level="INFO">@{srcs} = [ ]</msg>
+<var>@{srcs}</var>
+<doc>Creates and returns a list containing the given items.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.749485" elapsed="0.000000"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:37.750543" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.749485" elapsed="0.042736"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:37.809042" level="INFO">Attribute is: 'http://localhost:4173/src/assets/starrysky.svg'</msg>
+<msg time="2026-11-02T07:00:37.809042" level="INFO">${src} = http://localhost:4173/src/assets/starrysky.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.792221" elapsed="0.016821"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${srcs}</arg>
+<arg>${src}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.809042" elapsed="0.000000"/>
+</kw>
+<var name="${i}">0</var>
+<status status="PASS" start="2026-11-02T07:00:37.749485" elapsed="0.059557"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:37.810112" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.810112" elapsed="0.030452"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:37.847564" level="INFO">Attribute is: 'http://localhost:4173/src/assets/river.svg'</msg>
+<msg time="2026-11-02T07:00:37.847564" level="INFO">${src} = http://localhost:4173/src/assets/river.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.840564" elapsed="0.007000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${srcs}</arg>
+<arg>${src}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.847564" elapsed="0.000000"/>
+</kw>
+<var name="${i}">1</var>
+<status status="PASS" start="2026-11-02T07:00:37.810112" elapsed="0.037452"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:37.848540" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.848540" elapsed="0.027236"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:37.882455" level="INFO">Attribute is: 'http://localhost:4173/src/assets/forest.svg'</msg>
+<msg time="2026-11-02T07:00:37.882455" level="INFO">${src} = http://localhost:4173/src/assets/forest.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.876720" elapsed="0.005735"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${srcs}</arg>
+<arg>${src}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.883467" elapsed="0.000000"/>
+</kw>
+<var name="${i}">2</var>
+<status status="PASS" start="2026-11-02T07:00:37.847564" elapsed="0.035903"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:37.883467" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.883467" elapsed="0.041748"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:37.930964" level="INFO">Attribute is: 'http://localhost:4173/src/assets/beach.svg'</msg>
+<msg time="2026-11-02T07:00:37.930964" level="INFO">${src} = http://localhost:4173/src/assets/beach.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.925215" elapsed="0.005749"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${srcs}</arg>
+<arg>${src}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.930964" elapsed="0.000927"/>
+</kw>
+<var name="${i}">3</var>
+<status status="PASS" start="2026-11-02T07:00:37.883467" elapsed="0.048424"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:37.931891" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.931891" elapsed="0.025616"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:37.963256" level="INFO">Attribute is: 'http://localhost:4173/src/assets/forest.svg'</msg>
+<msg time="2026-11-02T07:00:37.963256" level="INFO">${src} = http://localhost:4173/src/assets/forest.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.957507" elapsed="0.005749"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${srcs}</arg>
+<arg>${src}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.963256" elapsed="0.000000"/>
+</kw>
+<var name="${i}">4</var>
+<status status="PASS" start="2026-11-02T07:00:37.931891" elapsed="0.031365"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:37.964256" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.963256" elapsed="0.028724"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:37.997979" level="INFO">Attribute is: 'http://localhost:4173/src/assets/river.svg'</msg>
+<msg time="2026-11-02T07:00:37.997979" level="INFO">${src} = http://localhost:4173/src/assets/river.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.991980" elapsed="0.005999"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${srcs}</arg>
+<arg>${src}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.998984" elapsed="0.000000"/>
+</kw>
+<var name="${i}">5</var>
+<status status="PASS" start="2026-11-02T07:00:37.963256" elapsed="0.035728"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:37.999495" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:37.999495" elapsed="0.025615"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:38.030633" level="INFO">Attribute is: 'http://localhost:4173/src/assets/forest.svg'</msg>
+<msg time="2026-11-02T07:00:38.030633" level="INFO">${src} = http://localhost:4173/src/assets/forest.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.026115" elapsed="0.005533"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${srcs}</arg>
+<arg>${src}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.031648" elapsed="0.000000"/>
+</kw>
+<var name="${i}">6</var>
+<status status="PASS" start="2026-11-02T07:00:37.998984" elapsed="0.032664"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:38.032646" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.031648" elapsed="0.042888"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:38.080192" level="INFO">Attribute is: 'http://localhost:4173/src/assets/mountain.svg'</msg>
+<msg time="2026-11-02T07:00:38.080192" level="INFO">${src} = http://localhost:4173/src/assets/mountain.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.075514" elapsed="0.004678"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${srcs}</arg>
+<arg>${src}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.080192" elapsed="0.000992"/>
+</kw>
+<var name="${i}">7</var>
+<status status="PASS" start="2026-11-02T07:00:38.031648" elapsed="0.049536"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:38.081184" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.081184" elapsed="0.027543"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:38.114800" level="INFO">Attribute is: 'http://localhost:4173/src/assets/beach.svg'</msg>
+<msg time="2026-11-02T07:00:38.114800" level="INFO">${src} = http://localhost:4173/src/assets/beach.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.108727" elapsed="0.006073"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${srcs}</arg>
+<arg>${src}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.114800" elapsed="0.000000"/>
+</kw>
+<var name="${i}">8</var>
+<status status="PASS" start="2026-11-02T07:00:38.081184" elapsed="0.033616"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:38.115797" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.114800" elapsed="0.027097"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:38.149477" level="INFO">Attribute is: 'http://localhost:4173/src/assets/flowerfield.svg'</msg>
+<msg time="2026-11-02T07:00:38.149477" level="INFO">${src} = http://localhost:4173/src/assets/flowerfield.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.141897" elapsed="0.007580"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${srcs}</arg>
+<arg>${src}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.149477" elapsed="0.000000"/>
+</kw>
+<var name="${i}">9</var>
+<status status="PASS" start="2026-11-02T07:00:38.114800" elapsed="0.034677"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:38.150530" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.149477" elapsed="0.040703"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:38.196141" level="INFO">Attribute is: 'http://localhost:4173/src/assets/starrysky.svg'</msg>
+<msg time="2026-11-02T07:00:38.196141" level="INFO">${src} = http://localhost:4173/src/assets/starrysky.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.190180" elapsed="0.005961"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${srcs}</arg>
+<arg>${src}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.196141" elapsed="0.000000"/>
+</kw>
+<var name="${i}">10</var>
+<status status="PASS" start="2026-11-02T07:00:38.149477" elapsed="0.046664"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:38.197142" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.197142" elapsed="0.027638"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:38.229345" level="INFO">Attribute is: 'http://localhost:4173/src/assets/forest.svg'</msg>
+<msg time="2026-11-02T07:00:38.229345" level="INFO">${src} = http://localhost:4173/src/assets/forest.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.224780" elapsed="0.005619"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${srcs}</arg>
+<arg>${src}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.230399" elapsed="0.000000"/>
+</kw>
+<var name="${i}">11</var>
+<status status="PASS" start="2026-11-02T07:00:38.197142" elapsed="0.033257"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:38.231399" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.230399" elapsed="0.027318"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:38.263362" level="INFO">Attribute is: 'http://localhost:4173/src/assets/beach.svg'</msg>
+<msg time="2026-11-02T07:00:38.263362" level="INFO">${src} = http://localhost:4173/src/assets/beach.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.257717" elapsed="0.005645"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${srcs}</arg>
+<arg>${src}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.263362" elapsed="0.000000"/>
+</kw>
+<var name="${i}">12</var>
+<status status="PASS" start="2026-11-02T07:00:38.230399" elapsed="0.032963"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:38.264362" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.263362" elapsed="0.027689"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:38.297081" level="INFO">Attribute is: 'http://localhost:4173/src/assets/river.svg'</msg>
+<msg time="2026-11-02T07:00:38.297081" level="INFO">${src} = http://localhost:4173/src/assets/river.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.292135" elapsed="0.004946"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${srcs}</arg>
+<arg>${src}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.298656" elapsed="0.000000"/>
+</kw>
+<var name="${i}">13</var>
+<status status="PASS" start="2026-11-02T07:00:38.263362" elapsed="0.035294"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:38.298656" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.298656" elapsed="0.042817"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:38.347402" level="INFO">Attribute is: 'http://localhost:4173/src/assets/flowerfield.svg'</msg>
+<msg time="2026-11-02T07:00:38.347402" level="INFO">${src} = http://localhost:4173/src/assets/flowerfield.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.342458" elapsed="0.004944"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${srcs}</arg>
+<arg>${src}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.348912" elapsed="0.000000"/>
+</kw>
+<var name="${i}">14</var>
+<status status="PASS" start="2026-11-02T07:00:38.298656" elapsed="0.050256"/>
+</iter>
+<var>${i}</var>
+<value>15</value>
+<status status="PASS" start="2026-11-02T07:00:37.749485" elapsed="0.599427"/>
+</for>
+<kw name="Remove Duplicates" owner="Collections">
+<msg time="2026-11-02T07:00:38.348912" level="INFO">9 duplicates removed.</msg>
+<msg time="2026-11-02T07:00:38.348912" level="INFO">${unique} = ['http://localhost:4173/src/assets/starrysky.svg', 'http://localhost:4173/src/assets/river.svg', 'http://localhost:4173/src/assets/forest.svg', 'http://localhost:4173/src/assets/beach.svg', 'http://lo...</msg>
+<var>${unique}</var>
+<arg>${srcs}</arg>
+<doc>Returns a list without duplicates based on the given `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.348912" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2026-11-02T07:00:38.349925" level="INFO">Length is 6.</msg>
+<msg time="2026-11-02T07:00:38.349925" level="INFO">${count} = 6</msg>
+<var>${count}</var>
+<arg>${unique}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.348912" elapsed="0.001013"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${count} &gt; 1</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.349925" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:37.735231" elapsed="0.614694"/>
+</test>
+<test id="s1-s2-t4" name="AC8 - Clicking the first button does not change the background color" line="29">
+<kw name="Go To" owner="Browser" type="SETUP">
+<msg time="2026-11-02T07:00:38.366465" level="INFO">Successfully opened URL http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.356934" elapsed="0.009531"/>
+</kw>
+<kw name="Get Style" owner="Browser">
+<msg time="2026-11-02T07:00:38.384633" level="INFO">Value of key: background-color</msg>
+<msg time="2026-11-02T07:00:38.384633" level="INFO">Value of selected property: rgb(244, 246, 243)</msg>
+<msg time="2026-11-02T07:00:38.384633" level="INFO">${before} = rgb(244, 246, 243)</msg>
+<var>${before}</var>
+<arg>body</arg>
+<arg>background-color</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets the computed style properties of the element selected by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.366465" elapsed="0.018168"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:38.384633" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.384633" elapsed="0.040712"/>
+</kw>
+<kw name="Get Style" owner="Browser">
+<msg time="2026-11-02T07:00:38.430884" level="INFO">Value of key: background-color</msg>
+<msg time="2026-11-02T07:00:38.430884" level="INFO">Value of selected property: rgb(244, 246, 243)</msg>
+<msg time="2026-11-02T07:00:38.430884" level="INFO">${after} = rgb(244, 246, 243)</msg>
+<var>${after}</var>
+<arg>body</arg>
+<arg>background-color</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets the computed style properties of the element selected by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.425345" elapsed="0.005539"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${before}</arg>
+<arg>${after}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.430884" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:38.354934" elapsed="0.075950"/>
+</test>
+<kw name="Teardown Test Suite" owner="common" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2026-11-02T07:00:38.480607" level="INFO">Closed all browsers</msg>
+<arg>ALL</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.436016" elapsed="0.044591"/>
+</kw>
+<kw name="Stop Application Server" owner="common">
+<if>
+<branch type="IF" condition="${SERVER_STARTED_HERE}">
+<kw name="Terminate Process" owner="Process">
+<msg time="2026-11-02T07:00:38.481621" level="INFO">Gracefully terminating process.</msg>
+<msg time="2026-11-02T07:00:38.582954" level="INFO">Process completed.</msg>
+<arg>app-server</arg>
+<doc>Stops the process gracefully or forcefully.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.481621" elapsed="0.101333"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:38.480607" elapsed="0.102347"/>
+</branch>
+<status status="PASS" start="2026-11-02T07:00:38.480607" elapsed="0.102347"/>
+</if>
+<status status="PASS" start="2026-11-02T07:00:38.480607" elapsed="0.102347"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:38.435022" elapsed="0.147932"/>
+</kw>
+<doc>Covers: REQ-FUNC-002</doc>
+<status status="PASS" start="2026-11-02T07:00:32.153906" elapsed="6.429048"/>
+</suite>
+<suite id="s1-s3" name="REQ-FUNC-003" source="C:\Projects\Temp\SecretAgentTech\project1\tests\robot\REQ-FUNC-003.robot">
+<kw name="Setup Test Suite" owner="common" type="SETUP">
+<kw name="Start Application Server" owner="common">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Port Is Open" owner="common">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:40.647290" level="INFO">${open} = False</msg>
+<var>${open}</var>
+<arg>__import__('socket').socket().connect_ex(('localhost', int(${port}))) == 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.594807" elapsed="2.052483"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<msg time="2026-11-02T07:00:40.648936" level="FAIL">'False' should be true.</msg>
+<arg>${open}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="FAIL" start="2026-11-02T07:00:40.647290" elapsed="0.001646">'False' should be true.</status>
+</kw>
+<arg>${PORT}</arg>
+<status status="FAIL" start="2026-11-02T07:00:38.594135" elapsed="2.054801">'False' should be true.</status>
+</kw>
+<msg time="2026-11-02T07:00:40.648936" level="INFO">${already_up} = False</msg>
+<var>${already_up}</var>
+<arg>Port Is Open</arg>
+<arg>${PORT}</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-11-02T07:00:38.594135" elapsed="2.054801"/>
+</kw>
+<if>
+<branch type="IF" condition="not ${already_up}">
+<kw name="Start Process" owner="Process">
+<msg time="2026-11-02T07:00:40.650020" level="INFO">Starting process:
+node serve.js</msg>
+<arg>node</arg>
+<arg>serve.js</arg>
+<arg>cwd=${PROJECT_ROOT}</arg>
+<arg>alias=app-server</arg>
+<doc>Starts a new process on background.</doc>
+<status status="PASS" start="2026-11-02T07:00:40.650020" elapsed="0.009613"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-11-02T07:00:40.659633" level="INFO">${SERVER_STARTED_HERE} = True</msg>
+<arg>${SERVER_STARTED_HERE}</arg>
+<arg>${True}</arg>
+<doc>Makes the variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2026-11-02T07:00:40.659633" elapsed="0.000000"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Port Is Open" owner="common">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:41.176485" level="INFO">${open} = True</msg>
+<var>${open}</var>
+<arg>__import__('socket').socket().connect_ex(('localhost', int(${port}))) == 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:40.660690" elapsed="0.515795"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${open}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:41.176485" elapsed="0.000960"/>
+</kw>
+<arg>${PORT}</arg>
+<status status="PASS" start="2026-11-02T07:00:40.660690" elapsed="0.516755"/>
+</kw>
+<arg>15x</arg>
+<arg>1s</arg>
+<arg>Port Is Open</arg>
+<arg>${PORT}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2026-11-02T07:00:40.659633" elapsed="0.517812"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:40.648936" elapsed="0.528509"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Suite Variable" owner="BuiltIn">
+<arg>${SERVER_STARTED_HERE}</arg>
+<arg>${False}</arg>
+<doc>Makes the variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" start="2026-11-02T07:00:41.177445" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-11-02T07:00:41.177445" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2026-11-02T07:00:40.648936" elapsed="0.528509"/>
+</if>
+<status status="PASS" start="2026-11-02T07:00:38.594135" elapsed="2.583310"/>
+</kw>
+<kw name="Open Application" owner="common">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-11-02T07:00:41.179012" level="INFO">{"browser": "chromium", "headless": true, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Projects\\Temp\\SecretAgentTech\\project1\\test-output\\robot\\browser\\traces\\temp\\dfd3a8ef-72fd-4dee-94bd-be166309d059"}</msg>
+<msg time="2026-11-02T07:00:41.847349" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":true,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Projects\\Temp\\SecretAgentTech\\project1\\test-output\\robot\\browser\\traces\\temp\\dfd3a8ef-72fd-4dee-94bd-be166309d059"}</msg>
+<arg>chromium</arg>
+<arg>headless=True</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-11-02T07:00:41.177445" elapsed="0.670704"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2026-11-02T07:00:41.848656" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2026-11-02T07:00:41.853665" level="INFO">Successfully created context. </msg>
+<msg time="2026-11-02T07:00:41.853665" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2026-11-02T07:00:41.848149" elapsed="0.005516"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-11-02T07:00:43.845459" level="INFO">Successfully initialized new page object and opened url: http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-11-02T07:00:41.853665" elapsed="1.991794"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:41.177445" elapsed="2.668014"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:38.593516" elapsed="5.251943"/>
+</kw>
+<test id="s1-s3-t1" name="AC11 - Clicking the second button changes the background color" line="9">
+<kw name="Go To" owner="Browser" type="SETUP">
+<msg time="2026-11-02T07:00:43.862764" level="INFO">Successfully opened URL http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2026-11-02T07:00:43.853107" elapsed="0.009657"/>
+</kw>
+<kw name="Get Style" owner="Browser">
+<msg time="2026-11-02T07:00:43.888028" level="INFO">Value of key: background-color</msg>
+<msg time="2026-11-02T07:00:43.889042" level="INFO">Value of selected property: rgb(244, 246, 243)</msg>
+<msg time="2026-11-02T07:00:43.889042" level="INFO">${before} = rgb(244, 246, 243)</msg>
+<var>${before}</var>
+<arg>body</arg>
+<arg>background-color</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets the computed style properties of the element selected by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:43.863764" elapsed="0.025278"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:43.889626" level="INFO">Clicks the element '#color-button'.</msg>
+<arg>\#color-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:43.889042" elapsed="0.020206"/>
+</kw>
+<kw name="Get Style" owner="Browser">
+<msg time="2026-11-02T07:00:43.914976" level="INFO">Value of key: background-color</msg>
+<msg time="2026-11-02T07:00:43.914976" level="INFO">Value of selected property: rgb(127, 223, 63)</msg>
+<msg time="2026-11-02T07:00:43.915920" level="INFO">${after} = rgb(127, 223, 63)</msg>
+<var>${after}</var>
+<arg>body</arg>
+<arg>background-color</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets the computed style properties of the element selected by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:43.909248" elapsed="0.006672"/>
+</kw>
+<kw name="Should Not Be Equal" owner="BuiltIn">
+<arg>${before}</arg>
+<arg>${after}</arg>
+<doc>Fails if the given objects are equal.</doc>
+<status status="PASS" start="2026-11-02T07:00:43.915920" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:43.845459" elapsed="0.070461"/>
+</test>
+<test id="s1-s3-t2" name="AC12 - Repeated clicks vary the picked color" line="15">
+<kw name="Go To" owner="Browser" type="SETUP">
+<msg time="2026-11-02T07:00:43.935231" level="INFO">Successfully opened URL http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2026-11-02T07:00:43.923547" elapsed="0.011684"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-11-02T07:00:43.935231" level="INFO">@{colors} = [ ]</msg>
+<var>@{colors}</var>
+<doc>Creates and returns a list containing the given items.</doc>
+<status status="PASS" start="2026-11-02T07:00:43.935231" elapsed="0.000000"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:43.936231" level="INFO">Clicks the element '#color-button'.</msg>
+<arg>\#color-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:43.936231" elapsed="0.038450"/>
+</kw>
+<kw name="Get Style" owner="Browser">
+<msg time="2026-11-02T07:00:43.987235" level="INFO">Value of key: background-color</msg>
+<msg time="2026-11-02T07:00:43.987235" level="INFO">Value of selected property: rgb(73, 151, 215)</msg>
+<msg time="2026-11-02T07:00:43.987235" level="INFO">${color} = rgb(73, 151, 215)</msg>
+<var>${color}</var>
+<arg>body</arg>
+<arg>background-color</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets the computed style properties of the element selected by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:43.975682" elapsed="0.011553"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${colors}</arg>
+<arg>${color}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:43.987235" elapsed="0.000000"/>
+</kw>
+<var name="${i}">0</var>
+<status status="PASS" start="2026-11-02T07:00:43.936231" elapsed="0.051004"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:43.987235" level="INFO">Clicks the element '#color-button'.</msg>
+<arg>\#color-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:43.987235" elapsed="0.036776"/>
+</kw>
+<kw name="Get Style" owner="Browser">
+<msg time="2026-11-02T07:00:44.030539" level="INFO">Value of key: background-color</msg>
+<msg time="2026-11-02T07:00:44.030539" level="INFO">Value of selected property: rgb(164, 254, 96)</msg>
+<msg time="2026-11-02T07:00:44.030539" level="INFO">${color} = rgb(164, 254, 96)</msg>
+<var>${color}</var>
+<arg>body</arg>
+<arg>background-color</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets the computed style properties of the element selected by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.024011" elapsed="0.006528"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${colors}</arg>
+<arg>${color}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.031554" elapsed="0.000000"/>
+</kw>
+<var name="${i}">1</var>
+<status status="PASS" start="2026-11-02T07:00:43.987235" elapsed="0.044319"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:44.032556" level="INFO">Clicks the element '#color-button'.</msg>
+<arg>\#color-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.031554" elapsed="0.042793"/>
+</kw>
+<kw name="Get Style" owner="Browser">
+<msg time="2026-11-02T07:00:44.081005" level="INFO">Value of key: background-color</msg>
+<msg time="2026-11-02T07:00:44.081005" level="INFO">Value of selected property: rgb(249, 210, 84)</msg>
+<msg time="2026-11-02T07:00:44.081005" level="INFO">${color} = rgb(249, 210, 84)</msg>
+<var>${color}</var>
+<arg>body</arg>
+<arg>background-color</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets the computed style properties of the element selected by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.074347" elapsed="0.006658"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${colors}</arg>
+<arg>${color}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.081991" elapsed="0.000000"/>
+</kw>
+<var name="${i}">2</var>
+<status status="PASS" start="2026-11-02T07:00:44.031554" elapsed="0.050437"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:44.082993" level="INFO">Clicks the element '#color-button'.</msg>
+<arg>\#color-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.081991" elapsed="0.041239"/>
+</kw>
+<kw name="Get Style" owner="Browser">
+<msg time="2026-11-02T07:00:44.128854" level="INFO">Value of key: background-color</msg>
+<msg time="2026-11-02T07:00:44.128854" level="INFO">Value of selected property: rgb(239, 237, 17)</msg>
+<msg time="2026-11-02T07:00:44.128854" level="INFO">${color} = rgb(239, 237, 17)</msg>
+<var>${color}</var>
+<arg>body</arg>
+<arg>background-color</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets the computed style properties of the element selected by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.123230" elapsed="0.005624"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${colors}</arg>
+<arg>${color}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.128854" elapsed="0.001019"/>
+</kw>
+<var name="${i}">3</var>
+<status status="PASS" start="2026-11-02T07:00:44.081991" elapsed="0.047882"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:44.129873" level="INFO">Clicks the element '#color-button'.</msg>
+<arg>\#color-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.129873" elapsed="0.028910"/>
+</kw>
+<kw name="Get Style" owner="Browser">
+<msg time="2026-11-02T07:00:44.164395" level="INFO">Value of key: background-color</msg>
+<msg time="2026-11-02T07:00:44.164395" level="INFO">Value of selected property: rgb(152, 119, 116)</msg>
+<msg time="2026-11-02T07:00:44.165401" level="INFO">${color} = rgb(152, 119, 116)</msg>
+<var>${color}</var>
+<arg>body</arg>
+<arg>background-color</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets the computed style properties of the element selected by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.158783" elapsed="0.006618"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${colors}</arg>
+<arg>${color}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.165401" elapsed="0.000000"/>
+</kw>
+<var name="${i}">4</var>
+<status status="PASS" start="2026-11-02T07:00:44.129873" elapsed="0.035528"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:44.166395" level="INFO">Clicks the element '#color-button'.</msg>
+<arg>\#color-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.165401" elapsed="0.041398"/>
+</kw>
+<kw name="Get Style" owner="Browser">
+<msg time="2026-11-02T07:00:44.213174" level="INFO">Value of key: background-color</msg>
+<msg time="2026-11-02T07:00:44.213174" level="INFO">Value of selected property: rgb(245, 182, 58)</msg>
+<msg time="2026-11-02T07:00:44.214148" level="INFO">${color} = rgb(245, 182, 58)</msg>
+<var>${color}</var>
+<arg>body</arg>
+<arg>background-color</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets the computed style properties of the element selected by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.206799" elapsed="0.007349"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${colors}</arg>
+<arg>${color}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.214148" elapsed="0.000000"/>
+</kw>
+<var name="${i}">5</var>
+<status status="PASS" start="2026-11-02T07:00:44.165401" elapsed="0.048747"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:44.215162" level="INFO">Clicks the element '#color-button'.</msg>
+<arg>\#color-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.214148" elapsed="0.025879"/>
+</kw>
+<kw name="Get Style" owner="Browser">
+<msg time="2026-11-02T07:00:44.245101" level="INFO">Value of key: background-color</msg>
+<msg time="2026-11-02T07:00:44.245101" level="INFO">Value of selected property: rgb(203, 169, 74)</msg>
+<msg time="2026-11-02T07:00:44.245101" level="INFO">${color} = rgb(203, 169, 74)</msg>
+<var>${color}</var>
+<arg>body</arg>
+<arg>background-color</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets the computed style properties of the element selected by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.240027" elapsed="0.005074"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${colors}</arg>
+<arg>${color}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.246106" elapsed="0.000000"/>
+</kw>
+<var name="${i}">6</var>
+<status status="PASS" start="2026-11-02T07:00:44.214148" elapsed="0.031958"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:44.247068" level="INFO">Clicks the element '#color-button'.</msg>
+<arg>\#color-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.246106" elapsed="0.028259"/>
+</kw>
+<kw name="Get Style" owner="Browser">
+<msg time="2026-11-02T07:00:44.281961" level="INFO">Value of key: background-color</msg>
+<msg time="2026-11-02T07:00:44.281961" level="INFO">Value of selected property: rgb(85, 108, 78)</msg>
+<msg time="2026-11-02T07:00:44.281961" level="INFO">${color} = rgb(85, 108, 78)</msg>
+<var>${color}</var>
+<arg>body</arg>
+<arg>background-color</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets the computed style properties of the element selected by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.274365" elapsed="0.007596"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${colors}</arg>
+<arg>${color}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.281961" elapsed="0.000000"/>
+</kw>
+<var name="${i}">7</var>
+<status status="PASS" start="2026-11-02T07:00:44.246106" elapsed="0.035855"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:44.282921" level="INFO">Clicks the element '#color-button'.</msg>
+<arg>\#color-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.282921" elapsed="0.040244"/>
+</kw>
+<kw name="Get Style" owner="Browser">
+<msg time="2026-11-02T07:00:44.329807" level="INFO">Value of key: background-color</msg>
+<msg time="2026-11-02T07:00:44.329807" level="INFO">Value of selected property: rgb(235, 116, 209)</msg>
+<msg time="2026-11-02T07:00:44.329807" level="INFO">${color} = rgb(235, 116, 209)</msg>
+<var>${color}</var>
+<arg>body</arg>
+<arg>background-color</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets the computed style properties of the element selected by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.324208" elapsed="0.005599"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${colors}</arg>
+<arg>${color}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.330810" elapsed="0.000000"/>
+</kw>
+<var name="${i}">8</var>
+<status status="PASS" start="2026-11-02T07:00:44.282921" elapsed="0.047889"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:44.331798" level="INFO">Clicks the element '#color-button'.</msg>
+<arg>\#color-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.330810" elapsed="0.027198"/>
+</kw>
+<kw name="Get Style" owner="Browser">
+<msg time="2026-11-02T07:00:44.364643" level="INFO">Value of key: background-color</msg>
+<msg time="2026-11-02T07:00:44.364643" level="INFO">Value of selected property: rgb(255, 172, 225)</msg>
+<msg time="2026-11-02T07:00:44.364643" level="INFO">${color} = rgb(255, 172, 225)</msg>
+<var>${color}</var>
+<arg>body</arg>
+<arg>background-color</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets the computed style properties of the element selected by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.358008" elapsed="0.006635"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${colors}</arg>
+<arg>${color}</arg>
+<doc>Adds `values` to the end of `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.364643" elapsed="0.000000"/>
+</kw>
+<var name="${i}">9</var>
+<status status="PASS" start="2026-11-02T07:00:44.330810" elapsed="0.033833"/>
+</iter>
+<var>${i}</var>
+<value>10</value>
+<status status="PASS" start="2026-11-02T07:00:43.935231" elapsed="0.430394"/>
+</for>
+<kw name="Remove Duplicates" owner="Collections">
+<msg time="2026-11-02T07:00:44.365625" level="INFO">0 duplicates removed.</msg>
+<msg time="2026-11-02T07:00:44.365625" level="INFO">${unique} = ['rgb(73, 151, 215)', 'rgb(164, 254, 96)', 'rgb(249, 210, 84)', 'rgb(239, 237, 17)', 'rgb(152, 119, 116)', 'rgb(245, 182, 58)', 'rgb(203, 169, 74)', 'rgb(85, 108, 78)', 'rgb(235, 116, 209)', 'rgb(255,...</msg>
+<var>${unique}</var>
+<arg>${colors}</arg>
+<doc>Returns a list without duplicates based on the given `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.365625" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2026-11-02T07:00:44.365625" level="INFO">Length is 10.</msg>
+<msg time="2026-11-02T07:00:44.365625" level="INFO">${count} = 10</msg>
+<var>${count}</var>
+<arg>${unique}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.365625" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${count} &gt; 1</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.366634" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:43.920602" elapsed="0.446032"/>
+</test>
+<test id="s1-s3-t3" name="AC13 - Clicking the second button does not affect the displayed image" line="26">
+<kw name="Go To" owner="Browser" type="SETUP">
+<msg time="2026-11-02T07:00:44.388862" level="INFO">Successfully opened URL http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.376259" elapsed="0.013155"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:44.389414" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.389414" elapsed="0.036301"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:44.440944" level="INFO">Attribute is: 'http://localhost:4173/src/assets/flowerfield.svg'</msg>
+<msg time="2026-11-02T07:00:44.440944" level="INFO">${src_before} = http://localhost:4173/src/assets/flowerfield.svg</msg>
+<var>${src_before}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.425715" elapsed="0.015229"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:44.441944" level="INFO">Clicks the element '#color-button'.</msg>
+<arg>\#color-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.441944" elapsed="0.032746"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<msg time="2026-11-02T07:00:44.477683" level="INFO">${count} = 1</msg>
+<var>${count}</var>
+<arg>\#image-display img</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.474690" elapsed="0.002993"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-11-02T07:00:44.478682" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${count}</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.477683" elapsed="0.000999"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:44.484283" level="INFO">Attribute is: 'http://localhost:4173/src/assets/flowerfield.svg'</msg>
+<msg time="2026-11-02T07:00:44.484283" level="INFO">${src_after} = http://localhost:4173/src/assets/flowerfield.svg</msg>
+<var>${src_after}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.478682" elapsed="0.005601"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${src_before}</arg>
+<arg>${src_after}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.485267" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:44.372263" elapsed="0.113004"/>
+</test>
+<kw name="Teardown Test Suite" owner="common" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2026-11-02T07:00:44.539993" level="INFO">Closed all browsers</msg>
+<arg>ALL</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.490934" elapsed="0.049059"/>
+</kw>
+<kw name="Stop Application Server" owner="common">
+<if>
+<branch type="IF" condition="${SERVER_STARTED_HERE}">
+<kw name="Terminate Process" owner="Process">
+<msg time="2026-11-02T07:00:44.541004" level="INFO">Gracefully terminating process.</msg>
+<msg time="2026-11-02T07:00:44.642371" level="INFO">Process completed.</msg>
+<arg>app-server</arg>
+<doc>Stops the process gracefully or forcefully.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.541004" elapsed="0.102376"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:44.539993" elapsed="0.103387"/>
+</branch>
+<status status="PASS" start="2026-11-02T07:00:44.539993" elapsed="0.103387"/>
+</if>
+<status status="PASS" start="2026-11-02T07:00:44.539993" elapsed="0.103387"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:44.489949" elapsed="0.153431"/>
+</kw>
+<doc>Covers: REQ-FUNC-003</doc>
+<status status="PASS" start="2026-11-02T07:00:38.586975" elapsed="6.056405"/>
+</suite>
+<suite id="s1-s4" name="REQ-TECH-001" source="C:\Projects\Temp\SecretAgentTech\project1\tests\robot\REQ-TECH-001.robot">
+<kw name="Setup Test Suite" owner="common" type="SETUP">
+<kw name="Start Application Server" owner="common">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Port Is Open" owner="common">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:46.719770" level="INFO">${open} = False</msg>
+<var>${open}</var>
+<arg>__import__('socket').socket().connect_ex(('localhost', int(${port}))) == 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.667957" elapsed="2.051813"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<msg time="2026-11-02T07:00:46.719770" level="FAIL">'False' should be true.</msg>
+<arg>${open}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="FAIL" start="2026-11-02T07:00:46.719770" elapsed="0.000000">'False' should be true.</status>
+</kw>
+<arg>${PORT}</arg>
+<status status="FAIL" start="2026-11-02T07:00:44.667957" elapsed="2.051813">'False' should be true.</status>
+</kw>
+<msg time="2026-11-02T07:00:46.719770" level="INFO">${already_up} = False</msg>
+<var>${already_up}</var>
+<arg>Port Is Open</arg>
+<arg>${PORT}</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-11-02T07:00:44.667957" elapsed="2.051813"/>
+</kw>
+<if>
+<branch type="IF" condition="not ${already_up}">
+<kw name="Start Process" owner="Process">
+<msg time="2026-11-02T07:00:46.720904" level="INFO">Starting process:
+node serve.js</msg>
+<arg>node</arg>
+<arg>serve.js</arg>
+<arg>cwd=${PROJECT_ROOT}</arg>
+<arg>alias=app-server</arg>
+<doc>Starts a new process on background.</doc>
+<status status="PASS" start="2026-11-02T07:00:46.720904" elapsed="0.005967"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-11-02T07:00:46.727774" level="INFO">${SERVER_STARTED_HERE} = True</msg>
+<arg>${SERVER_STARTED_HERE}</arg>
+<arg>${True}</arg>
+<doc>Makes the variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2026-11-02T07:00:46.727774" elapsed="0.000000"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Port Is Open" owner="common">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:47.229743" level="INFO">${open} = True</msg>
+<var>${open}</var>
+<arg>__import__('socket').socket().connect_ex(('localhost', int(${port}))) == 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:46.728837" elapsed="0.500906"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${open}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:47.230752" elapsed="0.000000"/>
+</kw>
+<arg>${PORT}</arg>
+<status status="PASS" start="2026-11-02T07:00:46.727774" elapsed="0.502978"/>
+</kw>
+<arg>15x</arg>
+<arg>1s</arg>
+<arg>Port Is Open</arg>
+<arg>${PORT}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2026-11-02T07:00:46.727774" elapsed="0.502978"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:46.720904" elapsed="0.509848"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Suite Variable" owner="BuiltIn">
+<arg>${SERVER_STARTED_HERE}</arg>
+<arg>${False}</arg>
+<doc>Makes the variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" start="2026-11-02T07:00:47.231766" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-11-02T07:00:47.230752" elapsed="0.001014"/>
+</branch>
+<status status="PASS" start="2026-11-02T07:00:46.720904" elapsed="0.510862"/>
+</if>
+<status status="PASS" start="2026-11-02T07:00:44.666910" elapsed="2.564856"/>
+</kw>
+<kw name="Open Application" owner="common">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-11-02T07:00:47.232764" level="INFO">{"browser": "chromium", "headless": true, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Projects\\Temp\\SecretAgentTech\\project1\\test-output\\robot\\browser\\traces\\temp\\07724ab2-db2e-49d5-ad8d-192bdfa772ab"}</msg>
+<msg time="2026-11-02T07:00:47.874839" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":true,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Projects\\Temp\\SecretAgentTech\\project1\\test-output\\robot\\browser\\traces\\temp\\07724ab2-db2e-49d5-ad8d-192bdfa772ab"}</msg>
+<arg>chromium</arg>
+<arg>headless=True</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-11-02T07:00:47.231766" elapsed="0.643073"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2026-11-02T07:00:47.875848" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2026-11-02T07:00:47.881260" level="INFO">Successfully created context. </msg>
+<msg time="2026-11-02T07:00:47.881260" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2026-11-02T07:00:47.874839" elapsed="0.006421"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-11-02T07:00:49.835400" level="INFO">Successfully initialized new page object and opened url: http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-11-02T07:00:47.882247" elapsed="1.953153"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:47.231766" elapsed="2.603634"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:44.666910" elapsed="5.168490"/>
+</kw>
+<test id="s1-s4-t1" name="AC9 - Image pool contains exactly six distinct images" line="9">
+<kw name="Go To" owner="Browser" type="SETUP">
+<msg time="2026-11-02T07:00:49.854680" level="INFO">Successfully opened URL http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.844080" elapsed="0.010600"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-11-02T07:00:49.854680" level="INFO" html="true">Getting file '&lt;a href="file://C:\Projects\Temp\SecretAgentTech\project1\src\images.js"&gt;C:\Projects\Temp\SecretAgentTech\project1\src\images.js&lt;/a&gt;'.</msg>
+<msg time="2026-11-02T07:00:49.855687" level="INFO">${content} = // Covers: REQ-TECH-001
+// Six original, locally-bundled SVG illustrations — copyright-free, no network dependency.
+// Resolved relative to this module's own URL, so the path is correct regardless of ...</msg>
+<var>${content}</var>
+<arg>${PROJECT_ROOT}/src/images.js</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.854680" elapsed="0.001007"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2026-11-02T07:00:49.855687" level="INFO">${ids} = ['forest', 'mountain', 'river', 'flowerfield', 'beach', 'starrysky']</msg>
+<var>${ids}</var>
+<arg>${content}</arg>
+<arg>id: "([\\w-]+)"</arg>
+<arg>1</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.855687" elapsed="0.000000"/>
+</kw>
+<kw name="Remove Duplicates" owner="Collections">
+<msg time="2026-11-02T07:00:49.855687" level="INFO">0 duplicates removed.</msg>
+<msg time="2026-11-02T07:00:49.855687" level="INFO">${unique} = ['forest', 'mountain', 'river', 'flowerfield', 'beach', 'starrysky']</msg>
+<var>${unique}</var>
+<arg>${ids}</arg>
+<doc>Returns a list without duplicates based on the given `list`.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.855687" elapsed="0.000000"/>
+</kw>
+<kw name="Length Should Be" owner="BuiltIn">
+<msg time="2026-11-02T07:00:49.856693" level="INFO">Length is 6.</msg>
+<arg>${unique}</arg>
+<arg>6</arg>
+<doc>Verifies that the length of the given item is correct.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.855687" elapsed="0.001006"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:49.836399" elapsed="0.020294"/>
+</test>
+<test id="s1-s4-t2" name="AC10 - Repeated clicks only ever reveal images from the known local pool" line="15">
+<kw name="Go To" owner="Browser" type="SETUP">
+<msg time="2026-11-02T07:00:49.874995" level="INFO">Successfully opened URL http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.865344" elapsed="0.009651"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-11-02T07:00:49.876000" level="INFO">@{known_files} = [ forest.svg | mountain.svg | river.svg | flowerfield.svg | beach.svg | starrysky.svg ]</msg>
+<var>@{known_files}</var>
+<arg>forest.svg</arg>
+<arg>mountain.svg</arg>
+<arg>river.svg</arg>
+<arg>flowerfield.svg</arg>
+<arg>beach.svg</arg>
+<arg>starrysky.svg</arg>
+<doc>Creates and returns a list containing the given items.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.874995" elapsed="0.001005"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:49.876000" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.876000" elapsed="0.051034"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:49.942507" level="INFO">Attribute is: 'http://localhost:4173/src/assets/starrysky.svg'</msg>
+<msg time="2026-11-02T07:00:49.943506" level="INFO">${src} = http://localhost:4173/src/assets/starrysky.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.927034" elapsed="0.016472"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:49.943506" level="INFO">${matched} = True</msg>
+<var>${matched}</var>
+<arg>any(name in """${src}""" for name in $known_files)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.943506" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${matched}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.944422" elapsed="0.000000"/>
+</kw>
+<var name="${i}">0</var>
+<status status="PASS" start="2026-11-02T07:00:49.876000" elapsed="0.068422"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:49.944422" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.944422" elapsed="0.029001"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:49.980095" level="INFO">Attribute is: 'http://localhost:4173/src/assets/mountain.svg'</msg>
+<msg time="2026-11-02T07:00:49.980095" level="INFO">${src} = http://localhost:4173/src/assets/mountain.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.974419" elapsed="0.005676"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:49.981152" level="INFO">${matched} = True</msg>
+<var>${matched}</var>
+<arg>any(name in """${src}""" for name in $known_files)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.980095" elapsed="0.001057"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${matched}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.981152" elapsed="0.000000"/>
+</kw>
+<var name="${i}">1</var>
+<status status="PASS" start="2026-11-02T07:00:49.944422" elapsed="0.036730"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:49.982153" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:49.982153" elapsed="0.026865"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:50.014640" level="INFO">Attribute is: 'http://localhost:4173/src/assets/beach.svg'</msg>
+<msg time="2026-11-02T07:00:50.014640" level="INFO">${src} = http://localhost:4173/src/assets/beach.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.009018" elapsed="0.005622"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:50.015729" level="INFO">${matched} = True</msg>
+<var>${matched}</var>
+<arg>any(name in """${src}""" for name in $known_files)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.014640" elapsed="0.001089"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${matched}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.015729" elapsed="0.000000"/>
+</kw>
+<var name="${i}">2</var>
+<status status="PASS" start="2026-11-02T07:00:49.981152" elapsed="0.034577"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:50.016717" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.015729" elapsed="0.041374"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:50.062785" level="INFO">Attribute is: 'http://localhost:4173/src/assets/mountain.svg'</msg>
+<msg time="2026-11-02T07:00:50.063791" level="INFO">${src} = http://localhost:4173/src/assets/mountain.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.058718" elapsed="0.005073"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:50.063791" level="INFO">${matched} = True</msg>
+<var>${matched}</var>
+<arg>any(name in """${src}""" for name in $known_files)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.063791" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${matched}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.063791" elapsed="0.001005"/>
+</kw>
+<var name="${i}">3</var>
+<status status="PASS" start="2026-11-02T07:00:50.015729" elapsed="0.049067"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:50.064796" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.064796" elapsed="0.026073"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:50.096933" level="INFO">Attribute is: 'http://localhost:4173/src/assets/forest.svg'</msg>
+<msg time="2026-11-02T07:00:50.096933" level="INFO">${src} = http://localhost:4173/src/assets/forest.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.090869" elapsed="0.006064"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:50.097931" level="INFO">${matched} = True</msg>
+<var>${matched}</var>
+<arg>any(name in """${src}""" for name in $known_files)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.097931" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${matched}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.097931" elapsed="0.000000"/>
+</kw>
+<var name="${i}">4</var>
+<status status="PASS" start="2026-11-02T07:00:50.064796" elapsed="0.033135"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:50.098933" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.098933" elapsed="0.024927"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:50.129582" level="INFO">Attribute is: 'http://localhost:4173/src/assets/mountain.svg'</msg>
+<msg time="2026-11-02T07:00:50.129582" level="INFO">${src} = http://localhost:4173/src/assets/mountain.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.123860" elapsed="0.005722"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:50.129582" level="INFO">${matched} = True</msg>
+<var>${matched}</var>
+<arg>any(name in """${src}""" for name in $known_files)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.129582" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${matched}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.129582" elapsed="0.001103"/>
+</kw>
+<var name="${i}">5</var>
+<status status="PASS" start="2026-11-02T07:00:50.098933" elapsed="0.031752"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:50.130685" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.130685" elapsed="0.028083"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:50.164465" level="INFO">Attribute is: 'http://localhost:4173/src/assets/mountain.svg'</msg>
+<msg time="2026-11-02T07:00:50.164465" level="INFO">${src} = http://localhost:4173/src/assets/mountain.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.158768" elapsed="0.005697"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:50.164465" level="INFO">${matched} = True</msg>
+<var>${matched}</var>
+<arg>any(name in """${src}""" for name in $known_files)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.164465" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${matched}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.164465" elapsed="0.001026"/>
+</kw>
+<var name="${i}">6</var>
+<status status="PASS" start="2026-11-02T07:00:50.130685" elapsed="0.034806"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:50.165491" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.165491" elapsed="0.024213"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:50.195856" level="INFO">Attribute is: 'http://localhost:4173/src/assets/mountain.svg'</msg>
+<msg time="2026-11-02T07:00:50.195856" level="INFO">${src} = http://localhost:4173/src/assets/mountain.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.189704" elapsed="0.006152"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:50.196801" level="INFO">${matched} = True</msg>
+<var>${matched}</var>
+<arg>any(name in """${src}""" for name in $known_files)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.195856" elapsed="0.000945"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${matched}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.196801" elapsed="0.000000"/>
+</kw>
+<var name="${i}">7</var>
+<status status="PASS" start="2026-11-02T07:00:50.165491" elapsed="0.031310"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:50.197811" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.196801" elapsed="0.027544"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:50.228929" level="INFO">Attribute is: 'http://localhost:4173/src/assets/beach.svg'</msg>
+<msg time="2026-11-02T07:00:50.228929" level="INFO">${src} = http://localhost:4173/src/assets/beach.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.224345" elapsed="0.004584"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:50.229998" level="INFO">${matched} = True</msg>
+<var>${matched}</var>
+<arg>any(name in """${src}""" for name in $known_files)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.229998" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${matched}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.229998" elapsed="0.000000"/>
+</kw>
+<var name="${i}">8</var>
+<status status="PASS" start="2026-11-02T07:00:50.196801" elapsed="0.033197"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:50.231009" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.231009" elapsed="0.026250"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:50.262900" level="INFO">Attribute is: 'http://localhost:4173/src/assets/beach.svg'</msg>
+<msg time="2026-11-02T07:00:50.263846" level="INFO">${src} = http://localhost:4173/src/assets/beach.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.257259" elapsed="0.006587"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:50.263846" level="INFO">${matched} = True</msg>
+<var>${matched}</var>
+<arg>any(name in """${src}""" for name in $known_files)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.263846" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${matched}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.264925" elapsed="0.000000"/>
+</kw>
+<var name="${i}">9</var>
+<status status="PASS" start="2026-11-02T07:00:50.231009" elapsed="0.033916"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:50.264925" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.264925" elapsed="0.024764"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:50.295705" level="INFO">Attribute is: 'http://localhost:4173/src/assets/mountain.svg'</msg>
+<msg time="2026-11-02T07:00:50.295705" level="INFO">${src} = http://localhost:4173/src/assets/mountain.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.289689" elapsed="0.006530"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:50.296219" level="INFO">${matched} = True</msg>
+<var>${matched}</var>
+<arg>any(name in """${src}""" for name in $known_files)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.296219" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${matched}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.296219" elapsed="0.001012"/>
+</kw>
+<var name="${i}">10</var>
+<status status="PASS" start="2026-11-02T07:00:50.264925" elapsed="0.032306"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2026-11-02T07:00:50.297231" level="INFO">Clicks the element '#reveal-button'.</msg>
+<arg>\#reveal-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.297231" elapsed="0.026627"/>
+</kw>
+<kw name="Get Attribute" owner="Browser">
+<msg time="2026-11-02T07:00:50.329498" level="INFO">Attribute is: 'http://localhost:4173/src/assets/starrysky.svg'</msg>
+<msg time="2026-11-02T07:00:50.329498" level="INFO">${src} = http://localhost:4173/src/assets/starrysky.svg</msg>
+<var>${src}</var>
+<arg>\#image-display img</arg>
+<arg>src</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the HTML ``attribute`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.323858" elapsed="0.005640"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:50.329498" level="INFO">${matched} = True</msg>
+<var>${matched}</var>
+<arg>any(name in """${src}""" for name in $known_files)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.329498" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${matched}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.329498" elapsed="0.001071"/>
+</kw>
+<var name="${i}">11</var>
+<status status="PASS" start="2026-11-02T07:00:50.297231" elapsed="0.033338"/>
+</iter>
+<var>${i}</var>
+<value>12</value>
+<status status="PASS" start="2026-11-02T07:00:49.876000" elapsed="0.454569"/>
+</for>
+<status status="PASS" start="2026-11-02T07:00:49.862343" elapsed="0.468226"/>
+</test>
+<kw name="Teardown Test Suite" owner="common" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2026-11-02T07:00:50.383563" level="INFO">Closed all browsers</msg>
+<arg>ALL</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.335570" elapsed="0.047993"/>
+</kw>
+<kw name="Stop Application Server" owner="common">
+<if>
+<branch type="IF" condition="${SERVER_STARTED_HERE}">
+<kw name="Terminate Process" owner="Process">
+<msg time="2026-11-02T07:00:50.384618" level="INFO">Gracefully terminating process.</msg>
+<msg time="2026-11-02T07:00:50.485737" level="INFO">Process completed.</msg>
+<arg>app-server</arg>
+<doc>Stops the process gracefully or forcefully.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.384618" elapsed="0.101119"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:50.384618" elapsed="0.102132"/>
+</branch>
+<status status="PASS" start="2026-11-02T07:00:50.384618" elapsed="0.102132"/>
+</if>
+<status status="PASS" start="2026-11-02T07:00:50.384618" elapsed="0.102132"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:50.335570" elapsed="0.151180"/>
+</kw>
+<doc>Covers: REQ-TECH-001</doc>
+<status status="PASS" start="2026-11-02T07:00:44.650908" elapsed="5.835842"/>
+</suite>
+<suite id="s1-s5" name="REQ-UX-001" source="C:\Projects\Temp\SecretAgentTech\project1\tests\robot\REQ-UX-001.robot">
+<kw name="Setup Test Suite" owner="common" type="SETUP">
+<kw name="Start Application Server" owner="common">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Port Is Open" owner="common">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:52.544496" level="INFO">${open} = False</msg>
+<var>${open}</var>
+<arg>__import__('socket').socket().connect_ex(('localhost', int(${port}))) == 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.499795" elapsed="2.044701"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<msg time="2026-11-02T07:00:52.545434" level="FAIL">'False' should be true.</msg>
+<arg>${open}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="FAIL" start="2026-11-02T07:00:52.544496" elapsed="0.000938">'False' should be true.</status>
+</kw>
+<arg>${PORT}</arg>
+<status status="FAIL" start="2026-11-02T07:00:50.498784" elapsed="2.046650">'False' should be true.</status>
+</kw>
+<msg time="2026-11-02T07:00:52.545434" level="INFO">${already_up} = False</msg>
+<var>${already_up}</var>
+<arg>Port Is Open</arg>
+<arg>${PORT}</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-11-02T07:00:50.498784" elapsed="2.046650"/>
+</kw>
+<if>
+<branch type="IF" condition="not ${already_up}">
+<kw name="Start Process" owner="Process">
+<msg time="2026-11-02T07:00:52.546414" level="INFO">Starting process:
+node serve.js</msg>
+<arg>node</arg>
+<arg>serve.js</arg>
+<arg>cwd=${PROJECT_ROOT}</arg>
+<arg>alias=app-server</arg>
+<doc>Starts a new process on background.</doc>
+<status status="PASS" start="2026-11-02T07:00:52.545434" elapsed="0.006511"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-11-02T07:00:52.552947" level="INFO">${SERVER_STARTED_HERE} = True</msg>
+<arg>${SERVER_STARTED_HERE}</arg>
+<arg>${True}</arg>
+<doc>Makes the variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2026-11-02T07:00:52.551945" elapsed="0.001002"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Port Is Open" owner="common">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-02T07:00:53.057381" level="INFO">${open} = True</msg>
+<var>${open}</var>
+<arg>__import__('socket').socket().connect_ex(('localhost', int(${port}))) == 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-02T07:00:52.552947" elapsed="0.504434"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${open}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-02T07:00:53.057381" elapsed="0.000000"/>
+</kw>
+<arg>${PORT}</arg>
+<status status="PASS" start="2026-11-02T07:00:52.552947" elapsed="0.504434"/>
+</kw>
+<arg>15x</arg>
+<arg>1s</arg>
+<arg>Port Is Open</arg>
+<arg>${PORT}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2026-11-02T07:00:52.552947" elapsed="0.504434"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:52.545434" elapsed="0.511947"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Suite Variable" owner="BuiltIn">
+<arg>${SERVER_STARTED_HERE}</arg>
+<arg>${False}</arg>
+<doc>Makes the variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" start="2026-11-02T07:00:53.057381" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-11-02T07:00:53.057381" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2026-11-02T07:00:52.545434" elapsed="0.511947"/>
+</if>
+<status status="PASS" start="2026-11-02T07:00:50.498784" elapsed="2.558597"/>
+</kw>
+<kw name="Open Application" owner="common">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-11-02T07:00:53.058953" level="INFO">{"browser": "chromium", "headless": true, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Projects\\Temp\\SecretAgentTech\\project1\\test-output\\robot\\browser\\traces\\temp\\3f646d3d-c835-4c6a-89c7-62738f3c125f"}</msg>
+<msg time="2026-11-02T07:00:53.682729" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":true,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Projects\\Temp\\SecretAgentTech\\project1\\test-output\\robot\\browser\\traces\\temp\\3f646d3d-c835-4c6a-89c7-62738f3c125f"}</msg>
+<arg>chromium</arg>
+<arg>headless=True</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-11-02T07:00:53.058953" elapsed="0.623776"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2026-11-02T07:00:53.683739" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2026-11-02T07:00:53.688747" level="INFO">Successfully created context. </msg>
+<msg time="2026-11-02T07:00:53.688747" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2026-11-02T07:00:53.682729" elapsed="0.006018"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-11-02T07:00:55.610670" level="INFO">Successfully initialized new page object and opened url: http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-11-02T07:00:53.688747" elapsed="1.921923"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:53.058953" elapsed="2.552717"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:50.498784" elapsed="5.112886"/>
+</kw>
+<test id="s1-s5-t1" name="AC1 - Header &quot;Testipalvelu&quot; is visible at the top of the page on load" line="9">
+<kw name="Go To" owner="Browser" type="SETUP">
+<msg time="2026-11-02T07:00:55.629138" level="INFO">Successfully opened URL http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2026-11-02T07:00:55.620061" elapsed="0.009077"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-11-02T07:00:55.646779" level="INFO">Waited for Element with selector #page-title at state visible</msg>
+<arg>\#page-title</arg>
+<arg>visible</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-11-02T07:00:55.630142" elapsed="0.016637"/>
+</kw>
+<kw name="Get Text" owner="Browser">
+<msg time="2026-11-02T07:00:55.667944" level="INFO">Text: 'Testipalvelu'</msg>
+<msg time="2026-11-02T07:00:55.667944" level="INFO">${text} = Testipalvelu</msg>
+<var>${text}</var>
+<arg>\#page-title</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-02T07:00:55.646779" elapsed="0.021165"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${text}</arg>
+<arg>Testipalvelu</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-11-02T07:00:55.667944" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:55.611670" elapsed="0.056274"/>
+</test>
+<kw name="Teardown Test Suite" owner="common" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2026-11-02T07:00:55.731296" level="INFO">Closed all browsers</msg>
+<arg>ALL</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-11-02T07:00:55.673404" elapsed="0.057892"/>
+</kw>
+<kw name="Stop Application Server" owner="common">
+<if>
+<branch type="IF" condition="${SERVER_STARTED_HERE}">
+<kw name="Terminate Process" owner="Process">
+<msg time="2026-11-02T07:00:55.732293" level="INFO">Gracefully terminating process.</msg>
+<msg time="2026-11-02T07:00:55.833932" level="INFO">Process completed.</msg>
+<arg>app-server</arg>
+<doc>Stops the process gracefully or forcefully.</doc>
+<status status="PASS" start="2026-11-02T07:00:55.732293" elapsed="0.101639"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:55.732293" elapsed="0.101639"/>
+</branch>
+<status status="PASS" start="2026-11-02T07:00:55.732293" elapsed="0.101639"/>
+</if>
+<status status="PASS" start="2026-11-02T07:00:55.731296" elapsed="0.102636"/>
+</kw>
+<status status="PASS" start="2026-11-02T07:00:55.673404" elapsed="0.161529"/>
+</kw>
+<doc>Covers: REQ-UX-001</doc>
+<status status="PASS" start="2026-11-02T07:00:50.490268" elapsed="5.344665"/>
+</suite>
+<status status="PASS" start="2026-11-02T07:00:17.030436" elapsed="38.807497"/>
+</suite>
+<statistics>
+<total>
+<stat pass="12" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Robot" id="s1" pass="12" fail="0" skip="0">Robot</stat>
+<stat name="REQ-FUNC-001" id="s1-s1" pass="2" fail="0" skip="0">Robot.REQ-FUNC-001</stat>
+<stat name="REQ-FUNC-002" id="s1-s2" pass="4" fail="0" skip="0">Robot.REQ-FUNC-002</stat>
+<stat name="REQ-FUNC-003" id="s1-s3" pass="3" fail="0" skip="0">Robot.REQ-FUNC-003</stat>
+<stat name="REQ-TECH-001" id="s1-s4" pass="2" fail="0" skip="0">Robot.REQ-TECH-001</stat>
+<stat name="REQ-UX-001" id="s1-s5" pass="1" fail="0" skip="0">Robot.REQ-UX-001</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

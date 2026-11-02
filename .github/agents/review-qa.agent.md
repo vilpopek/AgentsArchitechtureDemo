@@ -14,7 +14,7 @@ You are a specialist at running a final automated checklist over the traceabilit
 
 ## Approach
 1. Read `requirements.yaml`, `traceability-matrix.json`, `test-results.xml`, and coverage data.
-2. Find requirements with zero linked tests.
+2. Find requirements with zero linked tests, and requirements missing either a Playwright (`tests/playwright/`) or a Robot Framework (`tests/robot/`) test.
 3. Find tests with no linked requirement ID (orphan tests).
 4. Find modules/files below an agreed coverage threshold.
 5. Find any `stale` traceability entries still unresolved in `review-queue.json`.
@@ -25,7 +25,8 @@ A short checklist, e.g.:
 ```
 ✅ 42/45 requirements have linked tests
 ❌ 3 requirements with no tests: REQ-FUNC-030, REQ-UX-010, REQ-BIZ-002
-❌ 2 orphan tests with no requirement link: tests/misc/legacy.spec.ts
+⚠ 1 requirement missing a Robot Framework test: REQ-UX-004
+❌ 2 orphan tests with no requirement link: tests/playwright/legacy.spec.js
 ⚠ 1 unresolved stale requirement in review-queue.json: REQ-FUNC-012
 ✅ Overall coverage 87% (threshold: 80%)
 ```
