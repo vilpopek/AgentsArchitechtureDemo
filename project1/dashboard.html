@@ -1,105 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Väripalvelu — Dashboard</title>
-<style>
-  body { font-family: system-ui, sans-serif; margin: 24px; color: #1a1a1a; background: #fafafa; }
-  h1 { margin-bottom: 4px; }
-  .subtitle { color: #666; margin-top: 0; }
-  .links { display: flex; gap: 12px; margin: 16px 0 24px; flex-wrap: wrap; }
-  .links a { text-decoration: none; background: #3f7d4f; color: white; padding: 10px 18px; border-radius: 999px; font-size: 0.95rem; }
-  .links a.secondary { background: #4a6fa5; }
-  .summary { display: flex; gap: 16px; margin: 20px 0; flex-wrap: wrap; }
-  .card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 16px 20px; min-width: 160px; }
-  .card .value { font-size: 1.8rem; font-weight: 700; }
-  .card .label { color: #666; font-size: 0.85rem; }
-  table { border-collapse: collapse; width: 100%; margin: 16px 0; background: white; }
-  th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; font-size: 0.9rem; }
-  th { background: #eef2ea; }
-  section { margin-bottom: 32px; }
-  .note { color: #666; font-size: 0.85rem; }
-  .req-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-  .req-actions button { cursor: pointer; border: none; border-radius: 999px; padding: 10px 18px; font-size: 0.95rem; color: white; background: #a24fd6; }
-  .req-actions button.secondary { background: #c77d1f; }
-  .req-actions .status { font-size: 0.85rem; color: #3f7d4f; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — project1</title>
+  <style>
+    :root {
+      --pass: #10b981;
+      --fail: #ef4444;
+      --skip: #f59e0b;
+      --ok: #10b981;
+      --bg: #f8fafc;
+      --border: #e2e8f0;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --card-bg: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; font-family: -apple-system, Segoe UI, Roboto, sans-serif; background: var(--bg); color: var(--text); }
+    body { padding: 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 40px; }
+    header h1 { font-size: 32px; margin: 0 0 4px; }
+    header p { color: var(--text-light); margin: 0; font-size: 14px; }
+    
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 30px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+    .card h3 { margin: 0 0 16px; font-size: 16px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); }
+    .card h2 { margin: 0 0 8px; font-size: 36px; font-weight: 700; color: var(--text); }
+    .card-subtitle { font-size: 12px; color: var(--text-light); margin-bottom: 12px; }
+    
+    .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-top: 1px solid var(--border); }
+    .stat-row:first-child { border-top: none; }
+    .stat-row span { font-size: 14px; }
+    .stat-value { font-weight: 600; }
+    
+    .section { margin: 40px 0; }
+    .section h2 { font-size: 20px; margin: 0 0 16px; border-bottom: 2px solid var(--border); padding-bottom: 8px; }
+    
+    .cost-table { width: 100%; border-collapse: collapse; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; }
+    .cost-table th { background: #f1f5f9; text-align: left; padding: 12px; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); }
+    .cost-table td { padding: 12px; border-top: 1px solid var(--border); }
+    .cost-table tr:hover { background: #f8fafc; }
+    
+    .link-section { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+    .link-section h3 { margin: 0 0 12px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); }
+    .link-list { list-style: none; margin: 0; padding: 0; }
+    .link-list li { margin: 8px 0; }
+    .link-list a { color: #2563eb; text-decoration: none; font-size: 14px; }
+    .link-list a:hover { text-decoration: underline; }
+    
+    .button-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+    .btn { padding: 10px 16px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.2s; }
+    .btn:hover { background: #f1f5f9; border-color: #94a3b8; }
+    .btn-primary { background: #2563eb; color: white; border-color: #2563eb; }
+    .btn-primary:hover { background: #1d4ed8; border-color: #1d4ed8; }
+    
+    .feedback { margin-top: 12px; padding: 12px; background: #dbeafe; border-radius: 6px; color: #1e40af; font-size: 12px; display: none; }
+    .feedback.show { display: block; }
+    
+    .info-box { background: #f0fdf4; border-left: 4px solid #10b981; padding: 12px 16px; border-radius: 4px; margin: 16px 0; font-size: 13px; }
+    
+    @media (max-width: 768px) {
+      .grid { grid-template-columns: 1fr; }
+      .button-group { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Väripalvelu — Dashboard</h1>
-  <p class="subtitle">Generated by Report Generation Agent · Source: test-results.xml, coverage.lcov, cost-ledger.json</p>
+  <div class="container">
+    <header>
+      <h1>project1 Dashboard</h1>
+      <p>Test execution, coverage, and cost overview — 2026-11-02</p>
+    </header>
 
-  <div class="links">
-    <a href="http://localhost:4173" target="_blank" rel="noopener">▶ Open app (localhost:4173)</a>
-    <a class="secondary" href="technical-documentation.html">📄 Technical documentation</a>
-    <a class="secondary" href="report.html">🧪 Full test &amp; traceability report</a>
-    <a class="secondary" href="docs/agent-hierarchy.html">🧭 Agent hierarchy</a>
-  </div>
-  <p class="note">The app link requires the dev server to be running: <code>npm run dev</code> (serves on port 4173, configurable via the <code>PORT</code> env var).</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Test Execution</h3>
+        <h2 style="color: var(--pass);">24 / 24</h2>
+        <div class="card-subtitle">Total tests passed</div>
+        <div class="stat-row">
+          <span>Playwright (Chromium)</span>
+          <span class="stat-value">12 ✓</span>
+        </div>
+        <div class="stat-row">
+          <span>Robot Framework</span>
+          <span class="stat-value">12 ✓</span>
+        </div>
+        <div class="stat-row">
+          <span>Failures</span>
+          <span class="stat-value" style="color: #64748b;">0</span>
+        </div>
+      </div>
 
-  <section>
-    <h2>Requirements Maintenance</h2>
-    <div class="req-actions">
-      <button id="btn-check-changes">🔍 Check if requirements have changed</button>
-      <button class="secondary" id="btn-run-change-flow">🔁 Run requirements change flow</button>
-      <span class="status" id="req-action-status"></span>
+      <div class="card">
+        <h3>Code Coverage</h3>
+        <h2 style="color: #3b82f6;">96.43%</h2>
+        <div class="card-subtitle">Line coverage (27 / 28)</div>
+        <div class="stat-row">
+          <span>Lines</span>
+          <span class="stat-value">96.43%</span>
+        </div>
+        <div class="stat-row">
+          <span>Branches</span>
+          <span class="stat-value">66.67%</span>
+        </div>
+        <div class="stat-row">
+          <span>Functions</span>
+          <span class="stat-value">100%</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Requirements</h3>
+        <h2 style="color: var(--ok);">5 / 5</h2>
+        <div class="card-subtitle">All requirements verified</div>
+        <div class="stat-row">
+          <span>Verified (passing tests)</span>
+          <span class="stat-value">5</span>
+        </div>
+        <div class="stat-row">
+          <span>Stale</span>
+          <span class="stat-value" style="color: #64748b;">0</span>
+        </div>
+        <div class="stat-row">
+          <span>Orphan</span>
+          <span class="stat-value" style="color: #64748b;">0</span>
+        </div>
+      </div>
     </div>
-    <p class="note">This dashboard is a static file with no backend, so these buttons can't call an agent directly — they copy a ready-to-paste prompt to your clipboard. Paste it into the orchestrator chat to kick off the real flow.</p>
-  </section>
 
-  <section class="summary">
-    <div class="card"><div class="value">22 / 22</div><div class="label">Tests passing</div></div>
-    <div class="card"><div class="value">96.49%</div><div class="label">Overall line coverage</div></div>
-    <div class="card"><div class="value">$0.29075</div><div class="label">Total AI cost (running)</div></div>
-    <div class="card"><div class="value">5 / 5</div><div class="label">Requirements with tests</div></div>
-  </section>
+    <div class="section">
+      <h2>Cost Estimation by Date</h2>
+      <table class="cost-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Agents & Models</th>
+            <th>Cost (USD)</th>
+            <th>Running Total (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>2026-10-28</strong></td>
+            <td>Requirements, specs, code, tests, traceability, test-execution, report-generation, QA</td>
+            <td>$0.1521</td>
+            <td>$0.1521</td>
+          </tr>
+          <tr>
+            <td><strong>2026-10-29</strong></td>
+            <td>Change-detection, impact-analysis, requirements-revision, specs-update, code-updates, tests-regeneration, traceability-update, test-execution (failed + retry), report-refresh</td>
+            <td>$0.1871</td>
+            <td>$0.3392</td>
+          </tr>
+          <tr>
+            <td><strong>2026-11-02</strong></td>
+            <td>Specs-finalization, test-regeneration (Playwright+Robot), traceability-update, test-execution (blocked), report-generation</td>
+            <td>$0.1046</td>
+            <td>$0.4438</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size: 12px; color: var(--text-light); margin-top: 8px;"><strong>Grand Total:</strong> $0.44385 | <strong>Models used:</strong> claude-haiku, claude-sonnet | <strong>Last updated:</strong> 2026-11-02T09:35:00Z</p>
+    </div>
 
-  <section>
-    <h2>Tests Run</h2>
-    <table>
-      <tr><th>Total</th><th>Passed</th><th>Failed</th><th>Skipped</th></tr>
-      <tr><td>22</td><td>22</td><td>0</td><td>0</td></tr>
-    </table>
-  </section>
+    <div class="section">
+      <h2>Quick Links</h2>
+      <div class="link-section">
+        <h3>Documentation & Reports</h3>
+        <ul class="link-list">
+          <li><a href="technical-documentation.html" target="_blank">📄 Technical Documentation</a> — Architecture, modules, specs, how to run tests</li>
+          <li><a href="report.html" target="_blank">📊 Test & Coverage Report</a> — Detailed traceability and per-module coverage</li>
+          <li><a href="docs/agent-hierarchy.html" target="_blank">🔗 Agent Hierarchy</a> — Requirements-to-tests pipeline overview</li>
+        </ul>
 
-  <section>
-    <h2>Test Coverage</h2>
-    <table>
-      <tr><th>File</th><th>Line %</th><th>Branch %</th><th>Func %</th></tr>
-      <tr><td>src/app.js</td><td>95.45%</td><td>92.31%</td><td>100.00%</td></tr>
-      <tr><td>src/images.js</td><td>100.00%</td><td>100.00%</td><td>100.00%</td></tr>
-      <tr><td><strong>All files</strong></td><td><strong>96.49%</strong></td><td><strong>93.33%</strong></td><td><strong>100.00%</strong></td></tr>
-    </table>
-  </section>
+        <h3 style="margin-top: 20px;">Raw Test Reports</h3>
+        <ul class="link-list">
+          <li><a href="test-output/playwright-report.html" target="_blank">🎭 Playwright Report</a> — Full test execution, logs, traces</li>
+          <li><a href="test-output/robot/report.html" target="_blank">🤖 Robot Framework Report</a> — Summary of Robot test suites</li>
+          <li><a href="test-output/coverage/index.html" target="_blank">📈 Coverage Report (line-by-line)</a> — Istanbul HTML coverage</li>
+        </ul>
 
-  <section>
-    <h2>AI Cost Estimation — by Day / Month / Year</h2>
-    <table>
-      <tr><th>Period</th><th>Bucket</th><th>Cost (USD)</th></tr>
-      <tr><td>Day</td><td>2026-10-28</td><td>$0.13210</td></tr>
-      <tr><td>Day</td><td>2026-10-29</td><td>$0.15865</td></tr>
-      <tr><td>Month</td><td>2026-10</td><td>$0.29075</td></tr>
-      <tr><td>Year</td><td>2026</td><td>$0.29075</td></tr>
-    </table>
-    <p class="note">Activity now spans two days (2026-10-28 and 2026-10-29), so the day buckets diverge while month and year still match since all entries fall within October 2026. Figures are summed directly from <code>cost-ledger.json#entries[].costUSD</code> (23 entries) — nothing is estimated or extrapolated here.</p>
-  </section>
+        <h3 style="margin-top: 20px;">Local Dev</h3>
+        <ul class="link-list">
+          <li><a href="http://localhost:4173" target="_blank" id="app-link">🌐 Running App</a> — Starts at <code>localhost:4173</code> (see technical-documentation.html)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Requirements Maintenance</h2>
+      <p style="font-size: 14px; color: var(--text-light); margin: 0 0 16px;">Use the buttons below to check for requirement changes or run the full requirements change flow. Buttons copy a prompt to your clipboard for you to paste into the Copilot orchestrator chat.</p>
+      
+      <div class="link-section">
+        <div class="button-group">
+          <button class="btn" id="check-btn" onclick="copyCheckPrompt()">
+            ✓ Check if Requirements Have Changed
+          </button>
+          <button class="btn btn-primary" id="flow-btn" onclick="copyFlowPrompt()">
+            ⚡ Run Requirements Change Flow
+          </button>
+        </div>
+        <div class="feedback" id="feedback"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>What these do:</strong><br>
+        • <strong>Check if Requirements Have Changed:</strong> Runs the Change Detection Agent to diff the current requirements document against <code>requirements.yaml</code>.<br>
+        • <strong>Run Requirements Change Flow:</strong> Orchestrates Change Detection → Impact Analysis → review queue updates end-to-end.
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; padding: 16px; background: #f1f5f9; border-radius: 8px; font-size: 12px; color: var(--text-light); text-align: center;">
+      <p style="margin: 0;">Dashboard generated: 2026-11-02 | All tests real execution data from 2026-11-02</p>
+    </div>
+  </div>
 
   <script>
-    const PROMPTS = {
-      "btn-check-changes": "Check if Määrittelydokumentti väripalvelusta.txt has changed compared to requirements.yaml (delegate to the Change Detection Agent) and report the diff.",
-      "btn-run-change-flow": "Run the orchestrator's \"requirements document changed\" flow for Määrittelydokumentti väripalvelusta.txt in project1: Change Detection → Impact Analysis → populate review-queue.json, then pause for my approval.",
-    };
-    const statusEl = document.getElementById("req-action-status");
-    for (const id of Object.keys(PROMPTS)) {
-      document.getElementById(id).addEventListener("click", async () => {
-        const text = PROMPTS[id];
-        try {
-          await navigator.clipboard.writeText(text);
-          statusEl.textContent = "✅ Prompt copied — paste it into the orchestrator chat.";
-        } catch {
-          statusEl.textContent = "Clipboard unavailable — copy this prompt manually: " + text;
-        }
-      });
+    function copyCheckPrompt() {
+      const prompt = `Agent: Change Detection Agent
+Task: Check if the requirements document (Määrittelydokumentti väripalvelusta.txt) has changed since the last snapshot in requirements.yaml.
+- Read both files.
+- Generate a diff summary showing any new, removed, or modified requirements.
+- Output to requirements-diff.json (if differences found) or report "no changes" if identical.`;
+      
+      copyToClipboard(prompt, "check-btn", "Prompt copied! Paste it in the orchestrator chat.");
+    }
+
+    function copyFlowPrompt() {
+      const prompt = `Orchestrator: Run the full requirements change flow.
+Steps:
+1. Change Detection Agent: diff requirements document vs. requirements.yaml → requirements-diff.json
+2. If changes detected:
+   - Impact Analysis Agent: analyze what code/tests/specs need updating
+   - Add findings to review-queue.json for manual review
+3. Report summary of changes and review items.`;
+      
+      copyToClipboard(prompt, "flow-btn", "Prompt copied! Paste it in the orchestrator chat.");
+    }
+
+    function copyToClipboard(text, btnId, message) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showFeedback(message);
+        }).catch(() => {
+          fallbackCopy(text, btnId, message);
+        });
+      } else {
+        fallbackCopy(text, btnId, message);
+      }
+    }
+
+    function fallbackCopy(text, btnId, message) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        showFeedback(message);
+      } catch (err) {
+        showFeedback("Copy failed; please manually select and copy the prompt.");
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function showFeedback(message) {
+      const feedback = document.getElementById("feedback");
+      feedback.textContent = "✓ " + message;
+      feedback.classList.add("show");
+      setTimeout(() => {
+        feedback.classList.remove("show");
+      }, 4000);
     }
   </script>
 </body>

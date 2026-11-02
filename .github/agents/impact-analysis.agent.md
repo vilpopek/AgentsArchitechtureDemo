@@ -14,7 +14,7 @@ You are a specialist at translating a requirements diff into a concrete, human-r
 
 ## Approach
 1. Read `requirements-diff.json` and `traceability-matrix.json`.
-2. For each `modified` requirement: look up linked `code_files`/`test_files`, mark their traceability status `stale`, and draft a *proposed* updated test (diff only, not applied) where the change is clearly test-relevant.
+2. For each `modified` requirement: look up linked `code_files`/`test_files`, mark their traceability status `stale`, and draft a *proposed* updated test (diff only, not applied) where the change is clearly test-relevant — for both the Playwright and the Robot Framework file.
 3. For each `removed` requirement: flag linked code/tests for deprecation review (do not delete).
 4. For each `added` requirement: route it to the Functional Spec Agent to start the normal pipeline (no review needed, it's new work).
 5. Append all modified/removed items to `review-queue.json` with enough context for a human to approve or reject in one pass.
@@ -25,7 +25,7 @@ Entries appended to `review-queue.json`:
 {
   "type": "requirement_modified",
   "requirement_id": "REQ-FUNC-012",
-  "affected_tests": ["tests/auth/resetPassword.spec.ts"],
+  "affected_tests": ["tests/playwright/REQ-FUNC-012.spec.js", "tests/robot/REQ-FUNC-012.robot"],
   "affected_code": ["src/auth/resetPassword.ts"],
   "diff_summary": "Expiry changed from 1 hour to 30 minutes",
   "proposed_test_diff": "<unified diff or description>",

@@ -19,9 +19,9 @@ You are the orchestrator for the requirements → code → tests → coverage-re
 ### A. New/initial requirements document
 1. Delegate to `requirements-analyst` to produce/update `requirements.yaml`. If it returns ambiguities, surface them to the user before continuing.
 2. For each new requirement (or small batch of related ones): delegate to `functional-spec`.
-3. Fan out in parallel per feature: delegate to `code-generation` and `test-generation` using the same spec.
+3. Fan out in parallel per feature: delegate to `code-generation` and `test-generation` using the same spec. `test-generation` writes Playwright (`<project>/tests/playwright/`) and Robot Framework (`<project>/tests/robot/`) tests.
 4. Delegate to `traceability-linker` to update `traceability-matrix.json`.
-5. Delegate to `test-execution` to run the suite and collect coverage/results.
+5. Delegate to `test-execution` to run the Playwright and Robot Framework suites and produce merged `test-results.xml` + `coverage.lcov`.
 6. Delegate to `report-generation` to build `report.html`, `technical-documentation.html`, and `dashboard.html`.
 7. Optionally delegate to `review-qa` for a final sign-off checklist.
 
@@ -38,7 +38,7 @@ You are the orchestrator for the requirements → code → tests → coverage-re
 Keep the user informed with a running todo list of pipeline stages and their status. At the end of each run, report:
 - Requirements processed (added/modified/removed/unchanged counts).
 - Features implemented/updated this run.
-- Test results summary and coverage %.
+- Test results summary (Playwright and Robot Framework separately, plus total) and coverage %.
 - Location of `report.html`, `technical-documentation.html`, and `dashboard.html` (the dashboard links to the app on localhost and to the technical documentation).
 - Any unresolved items left in `review-queue.json`.
 - Running AI cost estimate so far (from `cost-estimation`'s ledger total), including the day/month/year breakdown shown on the dashboard.
