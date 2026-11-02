@@ -1,7 +1,7 @@
 {
-  "runningTotalUSD": 0.30345,
+  "runningTotalUSD": 0.44385,
   "currency": "USD",
-  "lastUpdated": "2026-10-29T12:40:00Z",
+  "lastUpdated": "2026-11-02T09:35:00Z",
   "rates": {
     "gpt-4o": { "inputPer1K": 0.0025, "outputPer1K": 0.01 },
     "gpt-4o-mini": { "inputPer1K": 0.00015, "outputPer1K": 0.0006 },
@@ -204,6 +204,61 @@
       "outputTokens": 1900,
       "costUSD": 0.0127,
       "note": "Refreshed report.html, dashboard.html, and technical-documentation.html with real 22/22 test results, 96.49% coverage, and 5-requirement traceability."
+    },
+    {
+      "timestamp": "2026-11-02T09:00:00Z",
+      "agent": "functional-spec",
+      "model": "claude-sonnet",
+      "inputTokens": 1800,
+      "outputTokens": 1600,
+      "costUSD": 0.0294,
+      "note": "Wrote specs/REQ-FUNC-002.spec.md, REQ-FUNC-003.spec.md, REQ-TECH-001.spec.md, REQ-UX-001.spec.md, split out from the combined REQ-FUNC-001.spec.md."
+    },
+    {
+      "timestamp": "2026-11-02T09:10:00Z",
+      "agent": "test-generation",
+      "model": "claude-sonnet",
+      "inputTokens": 4500,
+      "outputTokens": 5200,
+      "costUSD": 0.0915,
+      "note": "Regenerated tests in Playwright + Robot Framework format: 5 playwright specs, 5 robot suites, shared fixtures/resources, playwright.config.js, requirements.txt, merge-results.mjs, and package.json scripts/devDependencies. Legacy tests/app.test.js and tests/dom.test.js left on disk."
+    },
+    {
+      "timestamp": "2026-11-02T09:20:00Z",
+      "agent": "traceability-linker",
+      "model": "claude-haiku",
+      "inputTokens": 1200,
+      "outputTokens": 500,
+      "costUSD": 0.0037,
+      "note": "Updated traceability-matrix.json test_files for all 5 requirements to point at the new Playwright + Robot files."
+    },
+    {
+      "timestamp": "2026-11-02T09:25:00Z",
+      "agent": "test-execution",
+      "model": "claude-haiku",
+      "inputTokens": 700,
+      "outputTokens": 400,
+      "costUSD": 0.0027,
+      "status": "blocked",
+      "note": "No terminal tool available in this session; could not run npm install/playwright install/npm test/pip install/rfbrowser init/npm run test:robot. test-results.xml and coverage.lcov are unchanged (still the last real node --test run from 2026-10-29). Exact commands documented in technical-documentation.html for the user to run locally."
+    },
+    {
+      "timestamp": "2026-11-02T09:30:00Z",
+      "agent": "report-generation",
+      "model": "claude-haiku",
+      "inputTokens": 2200,
+      "outputTokens": 1500,
+      "costUSD": 0.0097,
+      "note": "Updated report.html, dashboard.html, and technical-documentation.html with the new test architecture and a migration-status banner; left pass/coverage figures as the last real legacy run pending re-execution."
+    },
+    {
+      "timestamp": "2026-11-02T09:35:00Z",
+      "agent": "review-qa",
+      "model": "claude-haiku",
+      "inputTokens": 900,
+      "outputTokens": 500,
+      "costUSD": 0.0034,
+      "note": "Final sign-off checklist for the test-format migration."
     }
   ]
 }

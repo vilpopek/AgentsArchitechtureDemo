@@ -1,0 +1,36 @@
+<testsuites id="" name="" tests="12" failures="0" skipped="0" errors="0" time="8.689384">
+<testsuite name="REQ-FUNC-001.spec.js" timestamp="2026-11-02T04:56:35.969Z" hostname="chromium" tests="2" failures="0" skipped="0" time="8.565" errors="0">
+<testcase name="REQ-FUNC-001: two centered buttons › AC2: two buttons are visible immediately on page load" classname="REQ-FUNC-001.spec.js" time="4.229">
+</testcase>
+<testcase name="REQ-FUNC-001: two centered buttons › AC3: both buttons are centered together in the viewport" classname="REQ-FUNC-001.spec.js" time="4.336">
+</testcase>
+</testsuite>
+<testsuite name="REQ-FUNC-002.spec.js" timestamp="2026-11-02T04:56:35.969Z" hostname="chromium" tests="4" failures="0" skipped="0" time="17.169" errors="0">
+<testcase name="REQ-FUNC-002: reveal a random nature image › AC4: no image is shown before the first click" classname="REQ-FUNC-002.spec.js" time="4.095">
+</testcase>
+<testcase name="REQ-FUNC-002: reveal a random nature image › AC5 &amp; AC7: clicking the first button shows an image in place (no reload)" classname="REQ-FUNC-002.spec.js" time="4.05">
+</testcase>
+<testcase name="REQ-FUNC-002: reveal a random nature image › AC6: repeated clicks keep exactly one image and vary the selection" classname="REQ-FUNC-002.spec.js" time="4.847">
+</testcase>
+<testcase name="REQ-FUNC-002: reveal a random nature image › AC8: clicking the first button does not change the background color" classname="REQ-FUNC-002.spec.js" time="4.177">
+</testcase>
+</testsuite>
+<testsuite name="REQ-FUNC-003.spec.js" timestamp="2026-11-02T04:56:35.969Z" hostname="chromium" tests="3" failures="0" skipped="0" time="12.957" errors="0">
+<testcase name="REQ-FUNC-003: random background color › AC11: clicking the second button changes the background color to a non-empty value" classname="REQ-FUNC-003.spec.js" time="4.189">
+</testcase>
+<testcase name="REQ-FUNC-003: random background color › AC12: the picked color is a syntactically valid CSS color value and may vary across clicks" classname="REQ-FUNC-003.spec.js" time="4.563">
+</testcase>
+<testcase name="REQ-FUNC-003: random background color › AC13: clicking the second button does not affect the displayed image area" classname="REQ-FUNC-003.spec.js" time="4.205">
+</testcase>
+</testsuite>
+<testsuite name="REQ-TECH-001.spec.js" timestamp="2026-11-02T04:56:35.969Z" hostname="chromium" tests="2" failures="0" skipped="0" time="4.936" errors="0">
+<testcase name="REQ-TECH-001: six distinct, locally-bundled images › AC9: the image pool contains exactly six distinct images" classname="REQ-TECH-001.spec.js" time="3.88">
+</testcase>
+<testcase name="REQ-TECH-001: six distinct, locally-bundled images › AC10: every pool image is served locally with no network dependency" classname="REQ-TECH-001.spec.js" time="1.056">
+</testcase>
+</testsuite>
+<testsuite name="REQ-UX-001.spec.js" timestamp="2026-11-02T04:56:35.969Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.08" errors="0">
+<testcase name="REQ-UX-001: header › AC1: header &apos;Testipalvelu&apos; is visible at the top of the page on load" classname="REQ-UX-001.spec.js" time="1.08">
+</testcase>
+</testsuite>
+</testsuites>
