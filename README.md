@@ -1,6 +1,6 @@
 Agent orchestration to develop application from customer requirements documentary.
 
-Recommended to start reading from this file: agentic-orchestration-plan.md
+Recommended to start reading from this file: orchestration-guide.html
 
 Agents can read requirements text file and generate needed functionality based on it.
 Test cases are generated and run when agents have built the app. 

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Orchestration Guide — SecretAgentTech</title>
+<style>
+  :root {
+    --accent: #2563eb;
+    --accent-dark: #1d4ed8;
+    --bg: #f8fafc;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --card-bg: #ffffff;
+    --ok: #10b981;
+    --warn: #f59e0b;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; font-family: -apple-system, Segoe UI, Roboto, sans-serif; background: var(--bg); color: var(--text); }
+  body { padding: 24px; }
+  .container { max-width: 1040px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 36px; }
+  header h1 { font-size: 30px; margin: 0 0 6px; }
+  header p { color: var(--text-light); margin: 0; font-size: 14px; }
+
+  .section { margin: 32px 0; }
+  .section h2 { font-size: 20px; margin: 0 0 14px; border-bottom: 2px solid var(--border); padding-bottom: 8px; }
+  .section h3 { font-size: 15px; margin: 20px 0 8px; color: var(--text); }
+  p { line-height: 1.6; font-size: 14px; }
+  code { background: #eef1f6; border-radius: 4px; padding: 1px 6px; font-size: 13px; }
+  pre { background: #0f172a; color: #e2e8f0; padding: 14px 16px; border-radius: 8px; overflow-x: auto; font-size: 13px; line-height: 1.5; }
+  pre code { background: none; padding: 0; color: inherit; }
+
+  .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+
+  .step-list { counter-reset: step; list-style: none; margin: 0; padding: 0; }
+  .step-list li { counter-increment: step; position: relative; padding: 10px 0 10px 40px; border-top: 1px solid var(--border); font-size: 14px; }
+  .step-list li:first-child { border-top: none; }
+  .step-list li::before { content: counter(step); position: absolute; left: 0; top: 10px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+
+  table { width: 100%; border-collapse: collapse; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  th { background: #f1f5f9; text-align: left; padding: 10px 12px; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); }
+  td { padding: 10px 12px; border-top: 1px solid var(--border); font-size: 13.5px; vertical-align: top; }
+  tr:hover td { background: #f8fafc; }
+
+  .badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: #dbeafe; color: var(--accent-dark); }
+  .badge.loop { background: #fef3c7; color: #92400e; }
+
+  .link-list { list-style: none; margin: 0; padding: 0; }
+  .link-list li { margin: 6px 0; font-size: 14px; }
+  .link-list a { color: var(--accent); text-decoration: none; }
+  .link-list a:hover { text-decoration: underline; }
+
+  .info-box { background: #f0fdf4; border-left: 4px solid var(--ok); padding: 10px 14px; border-radius: 4px; margin: 14px 0; font-size: 13.5px; }
+  .warn-box { background: #fffbeb; border-left: 4px solid var(--warn); padding: 10px 14px; border-radius: 4px; margin: 14px 0; font-size: 13.5px; }
+
+  footer { text-align: center; color: var(--text-light); font-size: 12px; margin-top: 40px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>Agent Orchestration Guide</h1>
+    <p>Requirements → Code → Tests → Coverage Report, built by a pipeline of specialized Copilot agents</p>
+  </header>
+
+  <!-- WHAT IT IS -->
+  <div class="section">
+    <h2>What this orchestration does</h2>
+    <p>
+      This workspace defines a multi-agent pipeline (<a href="agentic-orchestration-plan.md">agentic-orchestration-plan.md</a>)
+      that turns a raw customer requirements document into a working application with traceable, automated test coverage.
+      A top-level <strong>Orchestrator</strong> agent never implements anything itself — it only delegates to specialist
+      subagents (defined as <code>.agent.md</code> files under <a href=".github/agents">.github/agents</a>) and gates
+      progress on human approval wherever a decision could silently drift from what the customer actually asked for.
+    </p>
+    <p>
+      The pipeline is split into two flows:
+    </p>
+    <div class="grid">
+      <div class="card">
+        <span class="badge">Flow A — Initial build</span>
+        <p style="margin-top:10px">
+          Requirements doc → atomic, ID'd requirements → functional specs → code + tests generated in parallel per feature →
+          traceability matrix → test execution → HTML report/dashboard.
+        </p>
+      </div>
+      <div class="card">
+        <span class="badge loop">Flow B — Requirement change loop</span>
+        <p style="margin-top:10px">
+          Updated requirements doc → diffed against the stored requirements → impact analysis flags affected
+          code/tests in a review queue → human approves each item → only the affected requirement IDs are
+          re-processed through Flow A.
+        </p>
+      </div>
+    </div>
+    <p>
+      See <a href="agent-hierarchy.html">agent-hierarchy.html</a> for a visual diagram of every agent in the pipeline,
+      including which model tier each one runs on.
+    </p>
+  </div>
+
+  <!-- AGENTS -->
+  <div class="section">
+    <h2>Agents involved</h2>
+    <table>
+      <thead><tr><th>Agent</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>Requirements-to-Tests Orchestrator</td><td>Owns pipeline state, delegates every step, enforces human-approval gates</td></tr>
+        <tr><td>Requirements Analyst</td><td>Splits the raw doc into atomic, versioned, ID'd requirements (<code>requirements.yaml</code>)</td></tr>
+        <tr><td>Functional Spec Writer</td><td>Turns requirement IDs into a technical spec with acceptance criteria</td></tr>
+        <tr><td>Code Generation Agent</td><td>Implements one feature/module from its spec, tagged with requirement ID(s)</td></tr>
+        <tr><td>Test Generation Agent</td><td>Writes Playwright and Robot Framework tests from the same spec</td></tr>
+        <tr><td>Traceability Linker</td><td>Updates <code>traceability-matrix.json</code> (requirement ↔ code ↔ test ↔ status)</td></tr>
+        <tr><td>Test Execution Agent</td><td>Runs both test suites, merges results, collects coverage</td></tr>
+        <tr><td>Report Generation Agent</td><td>Builds <code>report.html</code>, <code>technical-documentation.html</code>, <code>dashboard.html</code></td></tr>
+        <tr><td>Review / QA Agent</td><td>Final sign-off pass: orphan tests, coverage thresholds, missing links</td></tr>
+        <tr><td>Change Detection Agent</td><td>Diffs a new requirements doc version against the stored one</td></tr>
+        <tr><td>Impact Analysis Agent</td><td>Maps a requirement diff to affected code/tests via the traceability matrix</td></tr>
+        <tr><td>Cost Estimation Agent</td><td>Logs estimated AI spend per unit of work to <code>cost-ledger.json</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- OUTPUTS -->
+  <div class="section">
+    <h2>Outputs produced (in <code>project1/</code>)</h2>
+    <table>
+      <thead><tr><th>File</th><th>What it is</th></tr></thead>
+      <tbody>
+        <tr><td><code>requirements.yaml</code></td><td>Atomic, ID'd, versioned/hashed requirements, typed functional/technical/UX/business</td></tr>
+        <tr><td><code>specs/*.spec.md</code></td><td>Functional specs per requirement (acceptance criteria, edge cases)</td></tr>
+        <tr><td><code>src/</code></td><td>Generated application code (the actual working app)</td></tr>
+        <tr><td><code>tests/playwright/*.spec.js</code></td><td>Playwright UI/E2E tests, one file per requirement, tagged <code>@REQ-ID</code></td></tr>
+        <tr><td><code>tests/robot/*.robot</code></td><td>Robot Framework acceptance tests, one file per requirement</td></tr>
+        <tr><td><code>traceability-matrix.json</code></td><td>Requirement ↔ code file(s) ↔ test file(s) ↔ status (ok/stale/orphan)</td></tr>
+        <tr><td><code>test-results.xml</code> / <code>coverage.lcov</code></td><td>Merged JUnit results (Playwright + Robot) and lcov coverage from the Playwright run</td></tr>
+        <tr><td><code>report.html</code></td><td>Test results + coverage, grouped by requirement</td></tr>
+        <tr><td><code>technical-documentation.html</code></td><td>Generated technical docs for the app</td></tr>
+        <tr><td><code>dashboard.html</code></td><td>Single landing page: links to the running app, the docs, test/coverage summary, and cost-over-time</td></tr>
+        <tr><td><code>review-queue.json</code></td><td>Pending human-review items (ambiguous requirements, proposed test diffs, deprecations)</td></tr>
+        <tr><td><code>cost-ledger.json</code></td><td>Append-only log of estimated AI cost per pipeline run</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Quick links (open after a pipeline run):
+    </p>
+    <ul class="link-list">
+      <li><a href="project1/dashboard.html">project1/dashboard.html</a> — start here</li>
+      <li><a href="project1/report.html">project1/report.html</a></li>
+      <li><a href="project1/technical-documentation.html">project1/technical-documentation.html</a></li>
+    </ul>
+  </div>
+
+  <!-- HOW TO RUN -->
+  <div class="section">
+    <h2>Running the orchestration on your own machine</h2>
+
+    <h3>1. Prerequisites</h3>
+    <ol class="step-list">
+      <li>VS Code with the GitHub Copilot and Copilot Chat extensions, signed in, with agent/subagent support enabled.</li>
+      <li>Node.js (LTS) for the sample app, Playwright and the dev server (<code>project1/serve.js</code>).</li>
+      <li>Python 3.x for the Robot Framework suite.</li>
+      <li>Open this folder (<code>SecretAgentTech</code>) as a VS Code workspace, so <code>.github/agents</code> is picked up.</li>
+    </ol>
+
+    <h3>2. Kick off an initial build (Flow A)</h3>
+    <ol class="step-list">
+      <li>Open Copilot Chat in agent mode.</li>
+      <li>Invoke the orchestrator, e.g. <code>@Requirements-to-Tests Orchestrator</code> (or ask to run it), and point it at a requirements document (e.g. <code>project1/Määrittelydokumentti väripalvelusta.txt</code>).</li>
+      <li>The orchestrator delegates in sequence: Requirements Analyst → Functional Spec Writer → (Code Generation + Test Generation in parallel per feature) → Traceability Linker → Test Execution → Report Generation, logging cost via the Cost Estimation Agent after each step.</li>
+      <li>Approve/clarify anything the orchestrator surfaces (ambiguous requirements, etc.) directly in the chat.</li>
+      <li>When it finishes, it reports requirement/test/coverage counts and the paths to the generated HTML files.</li>
+    </ol>
+
+    <h3>3. Re-run after the requirements document changes (Flow B)</h3>
+    <ol class="step-list">
+      <li>Give the orchestrator the updated requirements document.</li>
+      <li>It delegates to Change Detection → Impact Analysis, which writes <code>review-queue.json</code>.</li>
+      <li>Review the queue with the orchestrator in chat and approve/reject each flagged item — nothing is rewritten silently.</li>
+      <li>Approved items are re-processed through Flow A for just those requirement IDs, then Test Execution and Report Generation refresh the HTML outputs.</li>
+    </ol>
+
+    <h3>4. Manually running the generated app and tests (optional, no agents needed)</h3>
+    <p>Useful if you just want to re-run what the agents already generated, from <code>project1/</code>:</p>
+    <pre><code>cd project1
+npm install
+
+# serve the generated app (http://localhost:4173)
+npm run dev
+
+# Playwright tests + coverage -> coverage.lcov
+npm test
+
+# Robot Framework tests (needs: pip install -r tests/requirements.txt, then rfbrowser init once)
+npm run test:robot
+
+# merge Playwright + Robot results -> test-results.xml
+npm run test:merge</code></pre>
+
+    <div class="info-box">
+      <strong>Tip:</strong> <code>project1/dashboard.html</code> is the best starting point after any run — it links to the
+      live app, the technical docs, and summarizes test/coverage/cost.
+    </div>
+    <div class="warn-box">
+      <strong>Note:</strong> This setup is for learning/experimentation. Human-review gates (ambiguous requirements,
+      proposed test rewrites, deprecations) are intentional — don't configure the orchestrator to auto-approve them.
+    </div>
+  </div>
+
+  <footer>
+    Generated overview of the agent orchestration defined in <a href="agentic-orchestration-plan.md">agentic-orchestration-plan.md</a> and <a href=".github/agents">.github/agents</a>.
+  </footer>
+
+</div>
+</body>
+</html>
