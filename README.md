@@ -13,6 +13,6 @@ For requirements changes there is different execution plan.
 
 Made for learning and development purpose. 
 
-Sample app and created Dashboard can be found in project1 folder.
+Sample app and created Dashboard (project1/dashboard.html) can be found in project1 folder.
 
 Sub-agent .md files can be found under .github/agents folder.
