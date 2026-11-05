@@ -1,0 +1,8 @@
+Avaruusaluspeli
+
+Peli on selainpohjainen peli. Pelin Grafiikat voivat olla yksinkertaista pikseligrafiikkaa.
+Peli mukailee klassisia kaksiuloitteisia side scroller pelejä, joissa taustakuvan lipuminen simuloi avaruusaluksen lentämistä
+eteenpäin. Pelissä lennetään avaruusaluksella. Alusta voi ohjata ylös ja alas nuolilla, tällöin
+alus liikkuu ruudulla ylös ja alas. Alus kohtaa esteitä, joita pelaaja yrittää väistää.
+Jos alus törmää johonkin esteeseen, tulostuu "Peli loppu". Käyttäjä voi aloittaa pelin alustamalla
+lataamalla sivun uudestaan. 

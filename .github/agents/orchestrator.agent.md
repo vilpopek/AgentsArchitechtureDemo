@@ -2,7 +2,7 @@
 description: "Top-level orchestrator for turning customer requirements into coded features, tests, traceability, and an HTML coverage/results report — and for re-reviewing tests when requirements change."
 name: "Requirements-to-Tests Orchestrator"
 tools: [agent, read, edit, search, todo]
-agents: [requirements-analyst, functional-spec, code-generation, test-generation, traceability-linker, test-execution, change-detection, impact-analysis, report-generation, review-qa, cost-estimation]
+agents: ["Requirements Analyst", "Functional Spec Writer", "Code Generation Agent", "Test Generation Agent", "Traceability Linker", "Test Execution Agent", "Change Detection Agent", "Impact Analysis Agent", "Report Generation Agent", "Review / QA Agent", "Cost Estimation Agent"]
 model: "Claude Sonnet 5 (copilot)"
 user-invocable: true
 ---

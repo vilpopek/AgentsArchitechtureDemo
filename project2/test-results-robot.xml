@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Smoke" tests="2" errors="0" failures="0" skipped="0" time="25.982" timestamp="2026-11-05T20:24:32.884906">
+<testcase classname="Smoke" name="SMOKE AC1: Page Loads And HUD Score Is Visible At Zero" time="0.118">
+</testcase>
+<testcase classname="Smoke" name="SMOKE AC2: Arrow Key Moves Ship Vertically" time="0.378">
+</testcase>
+<properties>
+<property name="Documentation" value="Smoke subset — per human decision, this flat suite replaces&#10;the previous full per-requirement suite as the one that is&#10;actually executed going forward. The old REQ-*.robot files&#10;remain on disk (left untouched) but are intentionally&#10;excluded from the test:robot script, so only these tests&#10;run. Reuses the shared keywords/variables from&#10;common.resource (same http://localhost:4173, Setup/Teardown Test&#10;Suite, Get Ship Bounds helper) rather than duplicating them."/>
+</properties>
+</testsuite>

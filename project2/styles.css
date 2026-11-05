@@ -1,0 +1,84 @@
+/* Covers: REQ-UX-001 v2 (core-gameplay.spec.md) */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #000000;
+  font-family: "Courier New", "Lucida Console", monospace;
+}
+
+/* Covers: REQ-TECH-001, REQ-UX-001 v2 */
+#game-root {
+  position: relative;
+  width: 800px;
+  height: 450px;
+  box-shadow: 0 0 0 4px #2a3660;
+}
+
+#game-canvas {
+  display: block;
+  width: 800px;
+  height: 450px;
+  image-rendering: pixelated;
+  background: #05070f;
+}
+
+/* Covers: REQ-FUNC-006 v1 (score-counter.spec.md) */
+#hud-score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  color: #d9ffb3;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid #2a3660;
+  font-size: 20px;
+  font-family: "Courier New", "Lucida Console", monospace;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+
+/* Covers: REQ-UX-002 v2 (core-gameplay.spec.md) */
+#game-over-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #ffffff;
+  font-family: "Courier New", "Lucida Console", monospace;
+  text-align: center;
+}
+
+/* The display: flex above would otherwise override the UA's [hidden] rule,
+   making the overlay visible from page load. Keep it hidden until game.js
+   removes the attribute on collision (REQ-UX-002 v2). */
+#game-over-overlay[hidden] {
+  display: none;
+}
+
+#game-over-text {
+  margin: 0;
+  font-size: 48px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0 #2a3660;
+}
+
+#game-over-score {
+  margin: 0;
+  font-size: 22px;
+  color: #d9ffb3;
+}

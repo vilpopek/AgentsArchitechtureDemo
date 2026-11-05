@@ -1,0 +1,5 @@
+# Python dependencies for the Robot Framework suite (project2, flat layout).
+# Install with: pip install -r requirements.txt
+# Then one-time browser install for the Browser library: rfbrowser init
+robotframework>=7.0,<8.0
+robotframework-browser>=19.0,<20.0

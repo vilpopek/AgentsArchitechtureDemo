@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.5 (Python 3.12.2 on win32)" generated="2026-11-05T20:24:32.883903" rpa="false" schemaversion="5">
+<suite id="s1" name="Smoke" source="C:\Projects\Temp\SecretAgentTech\project2\smoke.robot">
+<kw name="Setup Test Suite" owner="common" type="SETUP">
+<kw name="Start Application Server" owner="common">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Port Is Open" owner="common">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-05T20:24:35.311635" level="INFO">${open} = False</msg>
+<var>${open}</var>
+<arg>__import__('socket').socket().connect_ex(('localhost', int(${port}))) == 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-05T20:24:33.284426" elapsed="2.028215"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<msg time="2026-11-05T20:24:35.313636" level="FAIL">'False' should be true.</msg>
+<arg>${open}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="FAIL" start="2026-11-05T20:24:35.312641" elapsed="0.000995">'False' should be true.</status>
+</kw>
+<arg>${PORT}</arg>
+<status status="FAIL" start="2026-11-05T20:24:33.284426" elapsed="2.029210">'False' should be true.</status>
+</kw>
+<msg time="2026-11-05T20:24:35.313636" level="INFO">${already_up} = False</msg>
+<var>${already_up}</var>
+<arg>Port Is Open</arg>
+<arg>${PORT}</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-11-05T20:24:33.283427" elapsed="2.030209"/>
+</kw>
+<if>
+<branch type="IF" condition="not ${already_up}">
+<kw name="Start Process" owner="Process">
+<msg time="2026-11-05T20:24:35.315638" level="INFO">Starting process:
+node serve.js</msg>
+<arg>node</arg>
+<arg>serve.js</arg>
+<arg>cwd=${PROJECT_ROOT}</arg>
+<arg>alias=app-server</arg>
+<doc>Starts a new process on background.</doc>
+<status status="PASS" start="2026-11-05T20:24:35.314642" elapsed="0.013000"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-11-05T20:24:35.327642" level="INFO">${SERVER_STARTED_HERE} = True</msg>
+<arg>${SERVER_STARTED_HERE}</arg>
+<arg>${True}</arg>
+<doc>Makes the variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2026-11-05T20:24:35.327642" elapsed="0.000000"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Port Is Open" owner="common">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-05T20:24:35.842527" level="INFO">${open} = True</msg>
+<var>${open}</var>
+<arg>__import__('socket').socket().connect_ex(('localhost', int(${port}))) == 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-05T20:24:35.328640" elapsed="0.513887"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${open}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-05T20:24:35.843092" elapsed="0.000000"/>
+</kw>
+<arg>${PORT}</arg>
+<status status="PASS" start="2026-11-05T20:24:35.328640" elapsed="0.515044"/>
+</kw>
+<arg>15x</arg>
+<arg>1s</arg>
+<arg>Port Is Open</arg>
+<arg>${PORT}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2026-11-05T20:24:35.327642" elapsed="0.516042"/>
+</kw>
+<status status="PASS" start="2026-11-05T20:24:35.314642" elapsed="0.529042"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Suite Variable" owner="BuiltIn">
+<arg>${SERVER_STARTED_HERE}</arg>
+<arg>${False}</arg>
+<doc>Makes the variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" start="2026-11-05T20:24:35.844335" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-11-05T20:24:35.843684" elapsed="0.000651"/>
+</branch>
+<status status="PASS" start="2026-11-05T20:24:35.314642" elapsed="0.529693"/>
+</if>
+<status status="PASS" start="2026-11-05T20:24:33.283427" elapsed="2.560908"/>
+</kw>
+<kw name="Open Application" owner="common">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-11-05T20:24:35.844963" level="INFO">{"browser": "chromium", "headless": true, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Projects\\Temp\\SecretAgentTech\\project2\\test-output\\robot\\browser\\traces\\temp\\4479c3d2-389e-4c13-874f-bf1e1cda2628"}</msg>
+<msg time="2026-11-05T20:24:36.905573" level="INFO">Starting Browser process C:\Projects\Temp\SecretAgentTech\project1\.venv\Lib\site-packages\Browser\wrapper\index.js using at 127.0.0.1:49926</msg>
+<msg time="2026-11-05T20:24:56.220634" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":true,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Projects\\Temp\\SecretAgentTech\\project2\\test-output\\robot\\browser\\traces\\temp\\4479c3d2-389e-4c13-874f-bf1e1cda2628"}</msg>
+<arg>chromium</arg>
+<arg>headless=True</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-11-05T20:24:35.844335" elapsed="20.376299"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2026-11-05T20:24:56.225633" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2026-11-05T20:24:56.243648" level="INFO">Successfully created context. </msg>
+<msg time="2026-11-05T20:24:56.243648" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2026-11-05T20:24:56.222634" elapsed="0.021014"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-11-05T20:24:58.106373" level="INFO">Successfully initialized new page object and opened url: http://localhost:4173</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-11-05T20:24:56.243648" elapsed="1.862725"/>
+</kw>
+<status status="PASS" start="2026-11-05T20:24:35.844335" elapsed="22.262038"/>
+</kw>
+<status status="PASS" start="2026-11-05T20:24:33.282433" elapsed="24.823940"/>
+</kw>
+<test id="s1-t1" name="SMOKE AC1: Page Loads And HUD Score Is Visible At Zero" line="16">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-11-05T20:24:58.152872" level="INFO">Waited for Element with selector #game-canvas at state attached</msg>
+<arg>\#game-canvas</arg>
+<arg>attached</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-11-05T20:24:58.123888" elapsed="0.030001"/>
+</kw>
+<kw name="Canvas Context Is Strictly 2D" owner="common">
+<kw name="Evaluate JavaScript" owner="Browser">
+<msg time="2026-11-05T20:24:58.166889" level="INFO">JavaScript executed successfully.</msg>
+<msg time="2026-11-05T20:24:58.166889" level="INFO">${result} = True</msg>
+<var>${result}</var>
+<arg>${None}</arg>
+<arg>() =&gt; { const c = document.getElementById('game-canvas'); const has2d = c.getContext('2d') instanceof CanvasRenderingContext2D; const webglNull = c.getContext('webgl') === null; const webgl2Null = c.getContext('webgl2') === null; return has2d &amp;&amp; webglNull &amp;&amp; webgl2Null; }</arg>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Executes given javascript on the selected element(s) or on page.</doc>
+<status status="PASS" start="2026-11-05T20:24:58.154888" elapsed="0.012001"/>
+</kw>
+<return>
+<value>${result}</value>
+<status status="PASS" start="2026-11-05T20:24:58.166889" elapsed="0.001000"/>
+</return>
+<msg time="2026-11-05T20:24:58.167889" level="INFO">${is_2d} = True</msg>
+<var>${is_2d}</var>
+<status status="PASS" start="2026-11-05T20:24:58.153889" elapsed="0.014000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${is_2d}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-05T20:24:58.168889" elapsed="0.000000"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-11-05T20:24:58.178893" level="INFO">Waited for Element with selector #hud-score-value at state visible</msg>
+<arg>\#hud-score-value</arg>
+<arg>visible</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-11-05T20:24:58.169888" elapsed="0.010001"/>
+</kw>
+<kw name="Get Hud Score" owner="common">
+<kw name="Get Text" owner="Browser">
+<msg time="2026-11-05T20:24:58.222858" level="INFO">Text: '0'</msg>
+<msg time="2026-11-05T20:24:58.222858" level="INFO">${text} = 0</msg>
+<var>${text}</var>
+<arg>\#hud-score-value</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-11-05T20:24:58.180889" elapsed="0.041969"/>
+</kw>
+<return>
+<value>${text}</value>
+<status status="PASS" start="2026-11-05T20:24:58.222858" elapsed="0.000000"/>
+</return>
+<msg time="2026-11-05T20:24:58.223845" level="INFO">${score} = 0</msg>
+<var>${score}</var>
+<status status="PASS" start="2026-11-05T20:24:58.179889" elapsed="0.043956"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${score}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-05T20:24:58.223845" elapsed="0.000877"/>
+</kw>
+<doc>Covers REQ-TECH-001 / REQ-UX-001 / REQ-FUNC-006 at a
+smoke level: the canvas exists with a strictly-2D rendering
+context and the HUD score starts at "0" and is visible.</doc>
+<tag>REQ-FUNC-006</tag>
+<tag>REQ-TECH-001</tag>
+<tag>REQ-UX-001</tag>
+<tag>SMOKE</tag>
+<status status="PASS" start="2026-11-05T20:24:58.106373" elapsed="0.118349"/>
+</test>
+<test id="s1-t2" name="SMOKE AC2: Arrow Key Moves Ship Vertically" line="28">
+<kw name="Get Ship Bounds" owner="common">
+<kw name="Evaluate JavaScript" owner="Browser">
+<msg time="2026-11-05T20:24:58.280852" level="INFO">JavaScript executed successfully.</msg>
+<msg time="2026-11-05T20:24:58.281835" level="INFO">${bounds} = {'minX': 193, 'maxX': 239, 'minY': 210, 'maxY': 239}</msg>
+<var>${bounds}</var>
+<arg>${None}</arg>
+<arg>() =&gt; { const c=document.getElementById('game-canvas'); const ctx=c.getContext('2d'); const d=ctx.getImageData(0,0,c.width,c.height).data; const ship=[[199,205,214],[141,148,160],[63,125,209],[255,138,61]]; let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity; for (let y=0;y&lt;c.height;y++){ for (let x=0;x&lt;c.width;x++){ const i=(y*c.width+x)*4; const r=d[i],g=d[i+1],b=d[i+2]; for (const sc of ship){ if (Math.abs(r-sc[0])&lt;=6 &amp;&amp; Math.abs(g-sc[1])&lt;=6 &amp;&amp; Math.abs(b-sc[2])&lt;=6){ if(x&lt;minX)minX=x; if(x&gt;maxX)maxX=x; if(y&lt;minY)minY=y; if(y&gt;maxY)maxY=y; } } } } return {minX: minX, maxX: maxX, minY: minY, maxY: maxY}; }</arg>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Executes given javascript on the selected element(s) or on page.</doc>
+<status status="PASS" start="2026-11-05T20:24:58.251838" elapsed="0.029997"/>
+</kw>
+<return>
+<value>${bounds}</value>
+<status status="PASS" start="2026-11-05T20:24:58.281835" elapsed="0.001000"/>
+</return>
+<msg time="2026-11-05T20:24:58.282835" level="INFO">${before} = {'minX': 193, 'maxX': 239, 'minY': 210, 'maxY': 239}</msg>
+<var>${before}</var>
+<status status="PASS" start="2026-11-05T20:24:58.250885" elapsed="0.031950"/>
+</kw>
+<kw name="Keyboard Key" owner="Browser">
+<arg>down</arg>
+<arg>ArrowDown</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Press a keyboard key on the virtual keyboard or set a key up or down.</doc>
+<status status="PASS" start="2026-11-05T20:24:58.282835" elapsed="0.011010"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-11-05T20:24:58.595058" level="INFO">Slept 300 milliseconds.</msg>
+<arg>300ms</arg>
+<doc>Pauses execution for the given time.</doc>
+<status status="PASS" start="2026-11-05T20:24:58.293845" elapsed="0.301213"/>
+</kw>
+<kw name="Keyboard Key" owner="Browser">
+<arg>up</arg>
+<arg>ArrowDown</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Press a keyboard key on the virtual keyboard or set a key up or down.</doc>
+<status status="PASS" start="2026-11-05T20:24:58.595058" elapsed="0.006138"/>
+</kw>
+<kw name="Get Ship Bounds" owner="common">
+<kw name="Evaluate JavaScript" owner="Browser">
+<msg time="2026-11-05T20:24:58.614351" level="INFO">JavaScript executed successfully.</msg>
+<msg time="2026-11-05T20:24:58.614351" level="INFO">${bounds} = {'minX': 193, 'maxX': 239, 'minY': 286, 'maxY': 315}</msg>
+<var>${bounds}</var>
+<arg>${None}</arg>
+<arg>() =&gt; { const c=document.getElementById('game-canvas'); const ctx=c.getContext('2d'); const d=ctx.getImageData(0,0,c.width,c.height).data; const ship=[[199,205,214],[141,148,160],[63,125,209],[255,138,61]]; let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity; for (let y=0;y&lt;c.height;y++){ for (let x=0;x&lt;c.width;x++){ const i=(y*c.width+x)*4; const r=d[i],g=d[i+1],b=d[i+2]; for (const sc of ship){ if (Math.abs(r-sc[0])&lt;=6 &amp;&amp; Math.abs(g-sc[1])&lt;=6 &amp;&amp; Math.abs(b-sc[2])&lt;=6){ if(x&lt;minX)minX=x; if(x&gt;maxX)maxX=x; if(y&lt;minY)minY=y; if(y&gt;maxY)maxY=y; } } } } return {minX: minX, maxX: maxX, minY: minY, maxY: maxY}; }</arg>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Executes given javascript on the selected element(s) or on page.</doc>
+<status status="PASS" start="2026-11-05T20:24:58.602091" elapsed="0.012260"/>
+</kw>
+<return>
+<value>${bounds}</value>
+<status status="PASS" start="2026-11-05T20:24:58.614351" elapsed="0.000000"/>
+</return>
+<msg time="2026-11-05T20:24:58.615349" level="INFO">${after} = {'minX': 193, 'maxX': 239, 'minY': 286, 'maxY': 315}</msg>
+<var>${after}</var>
+<status status="PASS" start="2026-11-05T20:24:58.601196" elapsed="0.014153"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${after}[minY] &gt; ${before}[minY]</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-05T20:24:58.615349" elapsed="0.000000"/>
+</kw>
+<doc>Covers REQ-FUNC-002 at a smoke level: holding ArrowDown
+moves the ship's rendered bounding box downward on the canvas.</doc>
+<tag>REQ-FUNC-002</tag>
+<tag>SMOKE</tag>
+<status status="PASS" start="2026-11-05T20:24:58.237855" elapsed="0.378458"/>
+</test>
+<kw name="Teardown Test Suite" owner="common" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2026-11-05T20:24:58.761267" level="INFO">Closed all browsers</msg>
+<arg>ALL</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-11-05T20:24:58.626062" elapsed="0.135205"/>
+</kw>
+<kw name="Stop Application Server" owner="common">
+<if>
+<branch type="IF" condition="${SERVER_STARTED_HERE}">
+<kw name="Terminate Process" owner="Process">
+<msg time="2026-11-05T20:24:58.764260" level="INFO">Gracefully terminating process.</msg>
+<msg time="2026-11-05T20:24:58.865945" level="INFO">Process completed.</msg>
+<arg>app-server</arg>
+<doc>Stops the process gracefully or forcefully.</doc>
+<status status="PASS" start="2026-11-05T20:24:58.763274" elapsed="0.102671"/>
+</kw>
+<status status="PASS" start="2026-11-05T20:24:58.762275" elapsed="0.103670"/>
+</branch>
+<status status="PASS" start="2026-11-05T20:24:58.762275" elapsed="0.103670"/>
+</if>
+<status status="PASS" start="2026-11-05T20:24:58.762275" elapsed="0.104787"/>
+</kw>
+<status status="PASS" start="2026-11-05T20:24:58.625000" elapsed="0.242062"/>
+</kw>
+<doc>Smoke subset — per human decision, this flat suite replaces
+the previous full per-requirement suite as the one that is
+actually executed going forward. The old REQ-*.robot files
+remain on disk (left untouched) but are intentionally
+excluded from the test:robot script, so only these tests
+run. Reuses the shared keywords/variables from
+common.resource (same http://localhost:4173, Setup/Teardown Test
+Suite, Get Ship Bounds helper) rather than duplicating them.</doc>
+<status status="PASS" start="2026-11-05T20:24:32.884906" elapsed="25.982156"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">REQ-FUNC-002</stat>
+<stat pass="1" fail="0" skip="0">REQ-FUNC-006</stat>
+<stat pass="1" fail="0" skip="0">REQ-TECH-001</stat>
+<stat pass="1" fail="0" skip="0">REQ-UX-001</stat>
+<stat pass="2" fail="0" skip="0">SMOKE</stat>
+</tag>
+<suite>
+<stat name="Smoke" id="s1" pass="2" fail="0" skip="0">Smoke</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

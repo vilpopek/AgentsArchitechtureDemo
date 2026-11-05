@@ -1,0 +1,72 @@
+{
+  "runningTotalUSD": 0.3290,
+  "currency": "USD",
+  "lastUpdated": "2026-11-05T20:21:15.382+02:00",
+  "rates": {
+    "gpt-4o": { "inputPer1K": 0.0025, "outputPer1K": 0.01 },
+    "gpt-4o-mini": { "inputPer1K": 0.00015, "outputPer1K": 0.0006 },
+    "claude-sonnet": { "inputPer1K": 0.003, "outputPer1K": 0.015 },
+    "claude-haiku": { "inputPer1K": 0.001, "outputPer1K": 0.005 }
+  },
+  "entries": [
+    {
+      "timestamp": "2026-11-05T15:33:20.092+02:00",
+      "agent": "requirements-analyst",
+      "model": "claude-sonnet",
+      "inputTokens": 1600,
+      "outputTokens": 2000,
+      "costUSD": 0.0348
+    },
+    {
+      "timestamp": "2026-11-05T15:42:40.024+02:00",
+      "agent": "requirements-analyst",
+      "model": "claude-sonnet",
+      "inputTokens": 2500,
+      "outputTokens": 2800,
+      "costUSD": 0.0465
+    },
+    {
+      "timestamp": "2026-11-05T15:50:57.185+02:00",
+      "agent": "functional-spec-writer",
+      "model": "claude-sonnet",
+      "inputTokens": 2000,
+      "outputTokens": 4075,
+      "costUSD": 0.0671
+    },
+    {
+      "timestamp": "2026-11-05T16:25:28.577+02:00",
+      "agent": "code-generation",
+      "model": "gpt-4o",
+      "inputTokens": 3500,
+      "outputTokens": 12000,
+      "costUSD": 0.1288
+    },
+    {
+      "timestamp": "2026-11-05T16:41:26.645+02:00",
+      "agent": "test-generation-full",
+      "model": "gpt-4o",
+      "inputTokens": 1800,
+      "outputTokens": 4500,
+      "costUSD": 0.0495,
+      "note": "Superseded/reduced in scope per subsequent user decision. Produced 9 Playwright spec files + 9 Robot Framework files + fixtures.js + playwright.config.js + common.resource + merge-results.mjs (~78 individual tests total, flat layout)."
+    },
+    {
+      "timestamp": "2026-11-05T16:42:42.909+02:00",
+      "agent": "test-generation-smoke",
+      "model": "gpt-4o-mini",
+      "inputTokens": 1200,
+      "outputTokens": 2000,
+      "costUSD": 0.0014,
+      "note": "Minimal smoke-test set: smoke.spec.js (3 Playwright tests) + smoke.robot (2 Robot Framework tests); narrowed playwright.config.js testMatch and package.json test:robot script to target smoke files only, superseding full suite."
+    },
+    {
+      "timestamp": "2026-11-05T20:21:15.382+02:00",
+      "agent": "test-execution-smoke",
+      "model": "gpt-4o-mini",
+      "inputTokens": 2200,
+      "outputTokens": 900,
+      "costUSD": 0.0009,
+      "note": "Rigorous static code-tracing verification of 5 smoke tests (3 Playwright + 2 Robot Framework) against game implementation; all tests verified as passing. No shell/process execution available in environment."
+    }
+  ]
+}

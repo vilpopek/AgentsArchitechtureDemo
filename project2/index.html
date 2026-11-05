@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avaruusaluspeli</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Covers: REQ-TECH-001, REQ-UX-001 v2 (core-gameplay.spec.md) -->
+  <div id="game-root">
+    <!-- Covers: REQ-FUNC-001 v2, REQ-FUNC-002 v2, REQ-FUNC-003 v2, REQ-FUNC-004 v2 -->
+    <canvas id="game-canvas" width="800" height="450"></canvas>
+
+    <!-- Covers: REQ-FUNC-006 v1 (score-counter.spec.md) -->
+    <div id="hud-score">
+      <span id="hud-score-value">0</span>
+    </div>
+
+    <!-- Covers: REQ-UX-002 v2 (core-gameplay.spec.md), REQ-FUNC-006 v1 (score-counter.spec.md) -->
+    <div id="game-over-overlay" hidden>
+      <p id="game-over-text">Peli loppu</p>
+      <p id="game-over-score">
+        <span id="game-over-score-value">0</span>
+      </p>
+    </div>
+  </div>
+
+  <script type="module" src="game.js"></script>
+</body>
+</html>

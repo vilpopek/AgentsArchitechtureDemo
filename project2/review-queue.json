@@ -1,0 +1,68 @@
+{
+  "generatedBy": "requirements-analyst",
+  "items": [
+    {
+      "id": "AMB-001",
+      "relatedRequirement": "REQ-FUNC-001",
+      "issue": "The scrolling speed of the background (and thus perceived forward flight speed) is not specified anywhere in the source document. Proposed resolution: implement a constant, moderate scroll speed (no acceleration over time) as a sensible default; revisit if the customer wants speed to increase over time for difficulty ramping.",
+      "status": "resolved-accepted-default",
+      "resolutionNote": "Human accepted proposed default as-is. Folded into REQ-FUNC-001 (version bumped to 2) acceptance criteria: constant, moderate scroll speed with no acceleration."
+    },
+    {
+      "id": "AMB-002",
+      "relatedRequirement": "REQ-FUNC-003",
+      "issue": "Obstacle spawn rate, spacing, pattern (random vs. fixed), and horizontal movement speed relative to the background are not specified. Proposed resolution: spawn obstacles at randomized intervals from the right edge of the screen, moving at the same horizontal speed as the scrolling background, with enough vertical variety that a gap always exists somewhere on screen for the ship to pass through.",
+      "status": "resolved-accepted-default",
+      "resolutionNote": "Human accepted proposed default as-is. Folded into REQ-FUNC-003 (version bumped to 2) acceptance criteria: randomized spawn interval, obstacles move at scroll speed, always-passable gap guaranteed."
+    },
+    {
+      "id": "AMB-003",
+      "relatedRequirement": "REQ-FUNC-006",
+      "issue": "The source document does not mention any scoring, score display, or high-score tracking. It is unclear whether the customer wants a score (e.g. based on survival time or obstacles passed). Proposed resolution: no scoring system is included in this version; no requirement was created for it. Flagging for explicit customer confirmation in case this was an unstated expectation.",
+      "status": "resolved-override",
+      "resolutionNote": "Human OVERRODE the proposed default. Decision: ADD a score counter as a new requirement rather than omitting it. New requirement REQ-FUNC-006 created (version 1): score increases by 10 points per obstacle successfully passed, always visible during play, shown on the 'Peli loppu' game-over overlay as the final score, and resets to 0 on page reload."
+    },
+    {
+      "id": "AMB-004",
+      "relatedRequirement": "REQ-FUNC-002",
+      "issue": "The ship's horizontal (left-right) screen position is never specified -- only vertical movement via arrow keys is described. Proposed resolution: fix the ship at a constant horizontal position (e.g. roughly one-quarter from the left edge of the play area), with only vertical movement under player control, matching classic side-scroller conventions implied by the document.",
+      "status": "resolved-accepted-default",
+      "resolutionNote": "Human accepted proposed default as-is. Folded into REQ-FUNC-002 (version bumped to 2) acceptance criteria: ship fixed horizontally at ~1/4 from left edge."
+    },
+    {
+      "id": "AMB-005",
+      "relatedRequirement": "REQ-UX-001",
+      "issue": "The document does not describe the visual appearance/shape of obstacles (e.g. asteroids, enemy ships, pipes/walls) beyond saying graphics may be 'simple pixel graphics'. Proposed resolution: render obstacles as simple pixel-art asteroid/rock shapes, varied in vertical position, consistent with the overall pixel-art style of REQ-UX-001.",
+      "status": "resolved-accepted-default",
+      "resolutionNote": "Human accepted proposed default as-is. Folded into REQ-UX-001 (version bumped to 2) acceptance criteria: obstacles are pixel-art asteroid/rock shapes."
+    },
+    {
+      "id": "AMB-006",
+      "relatedRequirement": null,
+      "issue": "No difficulty progression (e.g. increasing obstacle frequency or scroll speed over time) is mentioned in the source document. Proposed resolution: implement constant difficulty throughout a session (no progression) for this version; no requirement was created for difficulty scaling. Flagging in case the customer intended an implicit difficulty curve typical of this genre.",
+      "status": "resolved-accepted-default",
+      "resolutionNote": "Human accepted proposed default as-is. No new requirement created, as instructed. Documented as an explicit non-functional note within REQ-FUNC-003 (version 2) acceptance criteria: no difficulty progression occurs during a session."
+    },
+    {
+      "id": "AMB-007",
+      "relatedRequirement": "REQ-FUNC-004",
+      "issue": "The precision of collision detection (exact pixel/sprite-shape collision vs. simpler bounding-box collision) is not specified. Proposed resolution: use axis-aligned bounding-box (AABB) collision detection between the ship's and obstacle's rectangular areas, which is standard for simple pixel-art side-scrollers and sufficient given no precision requirement was stated.",
+      "status": "resolved-accepted-default",
+      "resolutionNote": "Human accepted proposed default as-is. Folded into REQ-FUNC-004 (version bumped to 2) acceptance criteria: AABB collision detection."
+    },
+    {
+      "id": "AMB-008",
+      "relatedRequirement": "REQ-UX-002",
+      "issue": "The document does not specify where/how the 'Peli loppu' text should be displayed (e.g. centered overlay, font size/color, whether the game freezes in the background). Proposed resolution: display 'Peli loppu' as a centered text overlay on top of the frozen game screen at the moment of collision, using a simple, legible pixel-style font consistent with REQ-UX-001.",
+      "status": "resolved-accepted-default",
+      "resolutionNote": "Human accepted proposed default as-is. Folded into REQ-UX-002 (version bumped to 2) acceptance criteria: centered overlay, frozen screen behind it, legible pixel-style font."
+    },
+    {
+      "id": "AMB-009",
+      "relatedRequirement": "REQ-FUNC-005",
+      "issue": "The document states restart happens only via reloading the page; it is unclear whether an in-game 'Restart' button/key (in addition to page reload) is desired for better UX, since full page reload is a somewhat unusual restart mechanism for a game. Proposed resolution: implement only the page-reload restart mechanism as literally stated, with no additional in-game restart control, since the document explicitly and solely describes this method.",
+      "status": "resolved-accepted-default",
+      "resolutionNote": "Human accepted proposed default as-is. Folded into REQ-FUNC-005 (version bumped to 2) acceptance criteria: restart via page reload only, no in-game restart control of any kind."
+    }
+  ]
+}

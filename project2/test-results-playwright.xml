@@ -1,0 +1,10 @@
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="7.173202">
+<testsuite name="smoke.spec.js" timestamp="2026-11-05T18:23:57.548Z" hostname="chromium" tests="3" failures="0" skipped="0" time="10.387" errors="0">
+<testcase name="Smoke: core game loads and responds › SMOKE AC1: page loads, canvas has a 2D context, HUD score is visible and starts at 0" classname="smoke.spec.js" time="3.303">
+</testcase>
+<testcase name="Smoke: core game loads and responds › SMOKE AC2: pressing ArrowUp/ArrowDown changes the ship&apos;s rendered vertical position" classname="smoke.spec.js" time="3.753">
+</testcase>
+<testcase name="Smoke: core game loads and responds › SMOKE AC3: a collision ends the game and shows the game-over overlay with score" classname="smoke.spec.js" time="3.331">
+</testcase>
+</testsuite>
+</testsuites>
